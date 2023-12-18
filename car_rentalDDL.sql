@@ -51,7 +51,7 @@ ALTER TABLE reservation ADD PRIMARY KEY(customer_id, plate_id);
 ALTER TABLE address ADD PRIMARY KEY(id);
 /*------------------------------------------------*/
 
-/*this code writen by Mahmoud reda*/
+/*this code writen by Youssef Mahmoud*/
 ALTER TABLE car ADD FOREIGN KEY(office_id) REFERENCES office(office_id);
 ALTER TABLE reservation ADD FOREIGN KEY(plate_id) REFERENCES car(plate_id);
 ALTER TABLE reservation ADD FOREIGN KEY(customer_id) REFERENCES customer(id);
