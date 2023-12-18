@@ -16,6 +16,7 @@ create table car (
     status varchar(225),
     plate_id int PRIMARY KEY,
     mode varchar(255),
+    image varchar(255),
     year int,
     price int,
     mileage int,
