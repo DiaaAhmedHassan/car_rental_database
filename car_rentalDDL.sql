@@ -1,5 +1,5 @@
 /*this code is used once then coment it*/
-create database Car_rental;
+/*create database Car_rental;*/
 /*-----------------------------*/
 use Car_rental;
 
