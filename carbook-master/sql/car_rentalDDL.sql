@@ -14,7 +14,7 @@ create table car (
     plate_id int PRIMARY KEY,
     model varchar(255),
     color varchar(225),
-    status varchar(225),
+    status varchar(225) CHECK (status IN ('available', 'rented', 'maintenance')),
     image varchar(255),
     year int,
     price int,

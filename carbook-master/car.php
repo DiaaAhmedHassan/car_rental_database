@@ -85,7 +85,7 @@
     						<h2 class="mb-0"><a href="car-single.html"><?php echo $car_model ?></a></h2>
     						<div class="d-flex mb-3">
 	    						<span class="cat" <?php include("car_status.php") ?> >
-									<?php echo $car_status; ?>
+									<?php echo ucfirst($car_status); ?>
 								</span>
 	    						<p class="price ml-auto"><?php echo "$$car_price"; ?> <span>/day</span></p>
     						</div>
