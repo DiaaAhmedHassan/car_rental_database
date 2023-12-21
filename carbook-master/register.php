@@ -1,17 +1,6 @@
 <?php
   if ($_SERVER["REQUEST_METHOD"] == "POST")
   {
-    session_start();
-    $servername = "localhost";
-    $username = "root";
-    $pass = "";
-    $dbname = "car_rental";
-
-    $conn = mysqli_connect($servername, $username, $pass, $dbname);
-    if(! $conn)
-    {
-      die("failed to connect!");
-    }
     $name = $_POST["name"];
     $email = $_POST["email"];
     $phone = $_POST["phone"];
@@ -33,6 +22,7 @@
         }
     }
 
+    mysqli_close($conn);
   }
 ?>
 
