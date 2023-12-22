@@ -1,3 +1,37 @@
+<?php
+
+if($_SERVER["REQUEST_METHOD"] == "POST"){
+  session_start();
+  $conn = mysqli_connect("localhost", "root", "", "car_rental");
+
+  $email = $_POST["email"];
+  $password = $_POST["password"];
+
+  $hashed_password = md5($password);
+
+  $result = mysqli_query($conn, "SELECT * FROM CUSTOMER WHERE CUSTOMER.email = '$email'");
+  $row = mysqli_fetch_assoc($result);
+
+  if(mysqli_num_rows($result) > 0){
+
+    if($hashed_password == $row["password"]){
+      
+      $_SESSION["login"] = true;
+      $_SESSION["id"] = $row["id"];
+      header("Location: home.html");
+
+    }else{
+      echo"<script>alert('incorrect password');</script>";
+    }
+
+  }else{
+    echo"<script>alert('email not found');</script>";
+  }
+
+}
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -29,15 +63,15 @@
   </head>
 <body>
   <div class="container">
-    <form action="#" class="request-form ftco-animate bg-primary fadeInUp ftco-animated">
+    <form action="#" method="post" class="request-form ftco-animate bg-primary fadeInUp ftco-animated">
       <h2>Welcome to AutoRent</h2>
       <div class="form-group">
         <label for="" class="label">Email</label>
-        <input type="text" class="form-control" placeholder="Enter Your Email">
+        <input type="email" name="email" class="form-control" placeholder="Enter Your Email">
       </div>
       <div class="form-group">
         <label for="" class="label">Password</label>
-        <input type="text" class="form-control" placeholder="Enter Password">
+        <input type="password" name="password" class="form-control" placeholder="Enter Password">
       </div>
       
       <div class="form-group">
