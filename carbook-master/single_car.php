@@ -1,3 +1,19 @@
+<?php
+    $car_id = $_GET['car_id'];
+
+    include("config.php");
+
+    $query = "SELECT * FROM car WHERE plate_id = $car_id";
+    $result = mysqli_query($conn, $query);
+    $car = mysqli_fetch_assoc($result);
+
+    $car_model = $car['model'];
+    $car_img = $car['image'];
+    $car_mileage = $car['mileage'];
+    $car_manufacturer = $car['manufacturer'];
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -50,7 +66,7 @@
 	  </nav>
     <!-- END nav -->
     
-    <section class="hero-wrap hero-wrap-2 js-fullheight" style="background-image: url('images/bg_3.jpg');" data-stellar-background-ratio="0.5">
+    <section class="hero-wrap hero-wrap-2 js-fullheight" style="background-image: url('images/home-header.jpg');" data-stellar-background-ratio="0.5">
       <div class="overlay"></div>
       <div class="container">
         <div class="row no-gutters slider-text js-fullheight align-items-end justify-content-start">
@@ -68,10 +84,10 @@
       	<div class="row justify-content-center">
       		<div class="col-md-12">
       			<div class="car-details">
-      				<div class="img rounded" style="background-image: url(images/bg_1.jpg);"></div>
+      				<div class="img rounded" style="background-image: url(<?php echo "$car_img";?>);"></div>
       				<div class="text text-center">
-      					<span class="subheading">Cheverolet</span>
-      					<h2>Mercedes Grand Sedan</h2>
+      					<span class="subheading"><?php echo "$car_manufacturer"; ?></span>
+      					<h2><?php echo "$car_model";?></h2>
       				</div>
       			</div>
       		</div>
@@ -85,7 +101,7 @@
 	              	<div class="text">
 		                <h3 class="heading mb-0 pl-3">
 		                	Mileage
-		                	<span>40,000</span>
+		                	<span><?php echo "$car_mileage"; ?></span>
 		                </h3>
 	                </div>
                 </div>

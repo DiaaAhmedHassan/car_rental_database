@@ -25,6 +25,14 @@
     <link rel="stylesheet" href="css/flaticon.css">
     <link rel="stylesheet" href="css/icomoon.css">
     <link rel="stylesheet" href="css/style.css">
+
+    <script>
+      function viewCar(carId)
+      {
+        window.location.href = "single_car.php?car_id=" + carId;
+      }
+
+    </script>
   </head>
   <body>
     
@@ -50,7 +58,7 @@
 	  </nav>
     <!-- END nav -->
     
-    <section class="hero-wrap hero-wrap-2 js-fullheight" style="background-image: url('images/bg_3.jpg');" data-stellar-background-ratio="0.5">
+    <section class="hero-wrap hero-wrap-2 js-fullheight" style="background-image: url('images/home-header.jpg');" data-stellar-background-ratio="0.5">
       <div class="overlay"></div>
       <div class="container">
         <div class="row no-gutters slider-text js-fullheight align-items-end justify-content-start">
@@ -72,6 +80,7 @@
 					include("fetch.php");
 					while($row = mysqli_fetch_assoc($result))
 					{
+            $car_id = $row['plate_id'];
 						$car_model = $row['model'];
 						$car_status = $row['status'];
 						$car_img = $row['image'];
@@ -89,7 +98,7 @@
 								</span>
 	    						<p class="price ml-auto"><?php echo "$$car_price"; ?> <span>/day</span></p>
     						</div>
-    						<p class="d-flex mb-0 d-block"><a href="#" class="btn btn-primary py-2 mr-1">Book now</a> <a href="car-single.html" class="btn btn-secondary py-2 ml-1">Details</a></p>
+    						<p class="d-flex mb-0 d-block"><a href="#" class="btn btn-primary py-2 mr-1">Rent now</a> <?php echo "<a onclick=\"viewCar({$car_id})\" class=\"btn btn-secondary py-2 ml-1\">Details</a>" ?></p>
     					</div>
     				</div>
     			</div>
