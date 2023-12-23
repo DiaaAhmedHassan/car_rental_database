@@ -27,12 +27,17 @@
     <link rel="stylesheet" href="css/style.css">
 
     <script>
+      function rentCar(carId){
+        window.location.href = "index.php?car_id=" + carId;
+      }
+    </script>
+    <script>
       function viewCar(carId)
       {
         window.location.href = "single_car.php?car_id=" + carId;
       }
-
     </script>
+
   </head>
   <body>
     
@@ -64,7 +69,7 @@
         <div class="row no-gutters slider-text js-fullheight align-items-end justify-content-start">
           <div class="col-md-9 ftco-animate pb-5">
           	<p class="breadcrumbs"><span class="mr-2"><a href="index.html">Home <i class="ion-ios-arrow-forward"></i></a></span> <span>Cars <i class="ion-ios-arrow-forward"></i></span></p>
-            <h1 class="mb-3 bread">Choose Your Car</h1>
+            <h1 class="mb-3 bread">Choose Your</h1>
           </div>
         </div>
       </div>
@@ -98,7 +103,7 @@
 								</span>
 	    						<p class="price ml-auto"><?php echo "$$car_price"; ?> <span>/day</span></p>
     						</div>
-    						<p class="d-flex mb-0 d-block"><a href="#" class="btn btn-primary py-2 mr-1">Rent now</a> <?php echo "<a onclick=\"viewCar({$car_id})\" class=\"btn btn-secondary py-2 ml-1\">Details</a>" ?></p>
+    						<p class="d-flex mb-0 d-block"><?php echo "<a onclick=\"rentCar({$car_id})\" class=\"btn btn-primary py-2 mr-1\">Rent now</a>"?> <?php echo "<a onclick=\"viewCar({$car_id})\" class=\"btn btn-secondary py-2 ml-1\">Details</a>" ?></p>
     					</div>
     				</div>
     			</div>

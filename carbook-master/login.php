@@ -18,7 +18,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
       
       $_SESSION["login"] = true;
       $_SESSION["id"] = $row["id"];
-      header("Location: home.html");
+      header("Location: car.php");
 
     }else{
       echo"<script>alert('incorrect password');</script>";
@@ -60,6 +60,12 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     <link rel="stylesheet" href="css/icomoon.css">
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/login.css">
+    <script>
+      function sendUser(userId){
+        window.location.href = "car.php?=" + userId;
+      }
+    </script>
+
   </head>
 <body>
   <div class="container">
