@@ -1,3 +1,17 @@
+<?php
+  require 'config.php';
+  if(!empty($_SESSION["id"])){
+    $id = $_SESSION["id"];
+    
+    $result = mysqli_query($conn, "SELECT * FROM customer WHERE id = $id");
+    $row = mysqli_fetch_assoc($result);
+
+  }else{
+    header("Location: login.php");
+  }
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -57,6 +71,7 @@
 	          <li class="nav-item active"><a href="car.html" class="nav-link">Cars</a></li>
 	          <li class="nav-item"><a href="blog.html" class="nav-link">Blog</a></li>
 	          <li class="nav-item"><a href="contact.html" class="nav-link">Contact</a></li>
+            <li class="nav-item"><a href="logout.php" class="nav-link">Logout</a></li>
 	        </ul>
 	      </div>
 	    </div>
@@ -69,7 +84,7 @@
         <div class="row no-gutters slider-text js-fullheight align-items-end justify-content-start">
           <div class="col-md-9 ftco-animate pb-5">
           	<p class="breadcrumbs"><span class="mr-2"><a href="index.html">Home <i class="ion-ios-arrow-forward"></i></a></span> <span>Cars <i class="ion-ios-arrow-forward"></i></span></p>
-            <h1 class="mb-3 bread">Choose Your</h1>
+            <h1 class="mb-3 bread">Choose Your car <?php echo $row["name"];?></h1>
           </div>
         </div>
       </div>

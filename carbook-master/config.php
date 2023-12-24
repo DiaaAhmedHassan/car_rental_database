@@ -1,15 +1,6 @@
 <?php
-
-    // session_start();
-    $servername = "localhost";
-    $username = "root";
-    $pass = "";
-    $dbname = "car_rental";
-
-    $conn = mysqli_connect($servername, $username, $pass, $dbname);
-    if(! $conn)
-    {
-    die("failed to connect!");
+    if(session_status() == PHP_SESSION_NONE){
+    session_start();
+    $conn = mysqli_connect("localhost", "root", "", "car_rental");
     }
-
 ?>

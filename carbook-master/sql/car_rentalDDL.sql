@@ -25,14 +25,14 @@ create table car (
 );
 
 create table customer (
-    id int,
+    id int AUTO_INCREMENT,
     email varchar(225),
     name varchar(225),
     password varchar(225),
     phone_number int,
     car_id int,
     PRIMARY KEY(id, email),
-    FOREIGN KEY(car_id) REFERENCES car(plate_id)
+    
 );
 
 create table reservation (

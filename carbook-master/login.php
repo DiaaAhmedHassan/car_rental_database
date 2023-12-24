@@ -1,15 +1,12 @@
 <?php
-
-if($_SERVER["REQUEST_METHOD"] == "POST"){
-  session_start();
-  $conn = mysqli_connect("localhost", "root", "", "car_rental");
-
+require 'config.php';
+if($_SERVER['REQUEST_METHOD'] == 'POST'){
   $email = $_POST["email"];
   $password = $_POST["password"];
 
   $hashed_password = md5($password);
 
-  $result = mysqli_query($conn, "SELECT * FROM CUSTOMER WHERE CUSTOMER.email = '$email'");
+  $result = mysqli_query($conn, "SELECT * FROM customer WHERE email = '$email'");
   $row = mysqli_fetch_assoc($result);
 
   if(mysqli_num_rows($result) > 0){
@@ -27,7 +24,6 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
   }else{
     echo"<script>alert('email not found');</script>";
   }
-
 }
 
 ?>
@@ -60,11 +56,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     <link rel="stylesheet" href="css/icomoon.css">
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/login.css">
-    <script>
-      function sendUser(userId){
-        window.location.href = "car.php?=" + userId;
-      }
-    </script>
+
 
   </head>
 <body>
@@ -84,7 +76,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
         <input type="submit" value="Log in" class="btn btn-secondary py-3 px-4">
       </div>
 
-      <p>Don't have an account? <a href="register.html">Sign up now</a></p>
+      <p>Don't have an account? <a href="register.php">Sign up now</a></p>
     </form>
   </div>
 

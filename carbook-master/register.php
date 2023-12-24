@@ -68,13 +68,14 @@
         <input type="text" class="form-control" placeholder="Enter Your name" name="name">
       </div>
       <div class="form-group">
-        <label for="" class="label">phone</label>
-        <input type="text" class="form-control" placeholder="Enter Your phone number" name="phone">
-      </div>
-      <div class="form-group">
         <label for="" class="label">Email</label>
         <input type="email" class="form-control" placeholder="Enter Your Email" name="email">
       </div>
+      <div class="form-group">
+        <label for="" class="label">phone</label>
+        <input type="text" class="form-control" placeholder="Enter Your phone number" name="phone">
+      </div>
+      
       <div class="form-group">
         <label for="" class="label">Password</label>
         <input type="password" class="form-control" placeholder="Enter Password" name="password">
