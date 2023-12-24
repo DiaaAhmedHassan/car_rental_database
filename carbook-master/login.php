@@ -14,7 +14,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
     if($hashed_password == $row["password"]){
       
       $_SESSION["login"] = true;
-      $_SESSION["id"] = $row["id"];
+      $_SESSION["client_name"] = $row["name"];
       header("Location: car.php");
 
     }else{

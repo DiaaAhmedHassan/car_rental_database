@@ -1,32 +1,38 @@
 <?php
-  if ($_SERVER["REQUEST_METHOD"] == "POST")
-  {
-    include("config.php");
-    $name = $_POST["name"];
-    $email = $_POST["email"];
-    $phone = $_POST["phone"];
-    $password = $_POST["password"];
-    $confirm_password = $_POST["confirm_password"];
-    $duplicate = mysqli_query($conn, "SELECT * FROM CUSTOMER WHERE CUSTOMER.email = '$email' ");
+    if (isset($_POST['register']))
+    {
+        include("config.php");
+        $name = $_POST["name"];
+        $email = $_POST["email"];
+        $phone = $_POST["phone"];
+        $password = $_POST["password"];
+        $confirm_password = $_POST["confirm_password"];
+        $duplicate = mysqli_query($conn, "SELECT * FROM CUSTOMER WHERE CUSTOMER.email = '$email' ");
 
-    $hashed_password = md5($password);
+        $hashed_password = md5($password);
 
-    if(mysqli_num_rows($duplicate) > 0){
-        echo "<script>alert(\"this email is already used\");</script>";
-    }else{
-        if($password == $confirm_password){
-            $query = "INSERT INTO CUSTOMER (name, email, phone_number, password) VALUES('$name', '$email', '$phone', '$hashed_password')";
-            mysqli_query($conn, $query);
-            echo"<script>alert(\"registeration succesfull\");</script>";
+        if(mysqli_num_rows($duplicate) > 0)
+        {
+            echo "<script>alert(\"this email already exists\");</script>";
         }
         else
         {
-          echo"<script>alert(\"assword confirmation failed\");</script>";
+            if($password == $confirm_password){
+                $query = "INSERT INTO CUSTOMER (name, email, phone_number, password) VALUES('$name', '$email', '$phone', '$hashed_password')";
+                mysqli_query($conn, $query);
+                $_SESSION['client_name'] = $_POST['name'];
+                echo"<script>alert(\"registeration succesfull\");</script>";
+                sleep(3);
+                header("Location: car.php");
+            }
+            else
+            {
+            echo"<script>alert(\"password confirmation failed\");</script>";
+            }
         }
-    }
 
-    mysqli_close($conn);
-  }
+        mysqli_close($conn);
+    }
 ?>
 
 <!DOCTYPE html>
@@ -61,7 +67,7 @@
 <body>
   
   <div class="container">
-    <form action="#" method="post" class="request-form ftco-animate bg-primary fadeInUp ftco-animated">
+    <form action="register.php" method="post" class="request-form ftco-animate bg-primary fadeInUp ftco-animated">
       <h2>Welcome to AutoRent</h2>
       <div class="form-group">
         <label for="" class="label">User name</label>
@@ -85,13 +91,11 @@
         <input type="password" class="form-control" placeholder="confirm your password" name="confirm_password">
       </div>
       <div class="form-group">
-        <input type="submit" value="Register" class="btn btn-secondary py-3 px-4">
+        <input type="submit" name="register" value="register" class="btn btn-secondary py-3 px-4">
       </div>
 
       <p>already have an account? <a href="login.php">Sign in now</a></p>
     </form>
   </div>
-
-  
 </body>
 </html>
