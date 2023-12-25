@@ -1,5 +1,6 @@
 <?php
 $car_id = $_GET['car_id'];
+
 include 'config.php';
 $q = "SELECT * FROM car WHERE plate_id = $car_id";
 $result = mysqli_query($conn, $q);
@@ -14,7 +15,21 @@ $officeRow = mysqli_fetch_assoc($officeData);
 
 $officeName = $officeRow['name'];
 $officeCountry = $officeRow['country'];
+?>
 
+<?php
+  if($_SERVER["REQUEST_METHOD"] == "POST"){
+    $car_id = $_POST["car_id"];
+    $startDate = $_POST["start_date"];
+    $endDate = $_POST["end_date"];
+    $time = $_POST["time_pick"];
+  
+    $totalPrice = 200;
+  
+    $renting = "INSERT INTO reservation (start_date, end_date, total_price, customer_id, plate_id, time) values ('$startDate', '$endDate', '{$_SESSION["id"]}', '$car_id', '$time')";
+    mysqli_query($conn, $renting);
+    echo "<script>alert('Rent Successful!'); window.location='index.php'</script>";
+  }
 ?>
 
 <!DOCTYPE html>
@@ -97,37 +112,41 @@ $officeCountry = $officeRow['country'];
     			<div class="col-md-12	featured-top">
     				<div class="row no-gutters">
 	  					<div class="col-md-4 d-flex align-items-center">
-	  						<form action="#" class="request-form ftco-animate bg-primary">
+	  						<form action="#" method="POST" class="request-form ftco-animate bg-primary">
 		          		<h2>Make your trip</h2>
 			    				<div class="form-group">
 			    					<label for="" class="label">country</label>
 			    					<input type="text" class="form-control" placeholder="country" value="<?php echo "$officeCountry"?>" disabled>
 			    				</div>
                   <div class="form-group">
+                    
+                    <input type="hidden" id="car_id" name="car_id" value="<?php echo "$car_id"?>">
+
+
 			    					<label for="" class="label">office</label>
 			    					<input type="text" class="form-control" placeholder="office" value="<?php echo "$officeName"?>" disabled>
 			    				</div>
 			    			
 			    				<div class="d-flex">
 			    					<div class="form-group mr-2">
-			                <label for="" class="label">Pick-up date</label>
-			                <input type="text" class="form-control" id="book_pick_date" placeholder="Date">
+			                <label for="" class="label">Start date</label>
+			                <input type="text" class="form-control" id="start_date" name="start_date" placeholder="Date">
 			              </div>
 			              <div class="form-group ml-2">
-			                <label for="" class="label">Drop-off date</label>
-			                <input type="text" class="form-control" id="book_off_date" placeholder="Date">
+			                <label for="" class="label">End date</label>
+			                <input type="text" class="form-control" id="end_date" name="end_date" placeholder="Date">
 			              </div>
 		              </div>
                   <div class="form-group">
 			    					<label for="" class="label">total price</label>
-			    					<input type="text" class="form-control" placeholder="price">
+			    					<input type="text" id="total_price" name="total_price" class="form-control" placeholder="price">
 			    				</div>
 		              <div class="form-group">
 		                <label for="" class="label">Pick-up time</label>
-		                <input type="text" class="form-control" id="time_pick" placeholder="Time">
+		                <input type="text" class="form-control" id="time_pick" name="time_pick" placeholder="Time">
 		              </div>
 			            <div class="form-group">
-			              <input type="submit" value="Rent A Car Now" class="btn btn-secondary py-3 px-4">
+			              <input type="submit" value="Rent the Car Now" class="btn btn-secondary py-3 px-4">
 			            </div>
 			    			</form>
 	  					</div>
