@@ -1,35 +1,28 @@
 <?php
-$car_id = $_GET['car_id'];
+    include 'config.php';
+    $car_id = $_GET['car_id'];
+    $q = "SELECT * FROM car WHERE plate_id = $car_id";
+    $result = mysqli_query($conn, $q);
+    $row = mysqli_fetch_assoc($result);
 
-include 'config.php';
-$q = "SELECT * FROM car WHERE plate_id = $car_id";
-$result = mysqli_query($conn, $q);
+    $q2 = "SELECT office.name, office.country FROM office WHERE {$row['office_id']} = office.id";
+    $officeData = mysqli_query($conn, $q2);
+    $officeRow = mysqli_fetch_assoc($officeData);
+    $officeName = $officeRow['name'];
+    $officeCountry = $officeRow['country'];
 
-$row = mysqli_fetch_assoc($result);
-
-$q2 = "SELECT office.name, office.country FROM office WHERE {$row['office_id']} = office.id";
-
-$officeData = mysqli_query($conn, $q2);
-
-$officeRow = mysqli_fetch_assoc($officeData);
-
-$officeName = $officeRow['name'];
-$officeCountry = $officeRow['country'];
-?>
-
-<?php
-  if($_SERVER["REQUEST_METHOD"] == "POST"){
-    $car_id = $_POST["car_id"];
-    $startDate = $_POST["start_date"];
-    $endDate = $_POST["end_date"];
-    $time = $_POST["time_pick"];
-  
-    $totalPrice = 200;
-  
-    $renting = "INSERT INTO reservation (start_date, end_date, total_price, customer_id, plate_id, time) values ('$startDate', '$endDate', '{$_SESSION["id"]}', '$car_id', '$time')";
-    mysqli_query($conn, $renting);
-    echo "<script>alert('Rent Successful!'); window.location='index.php'</script>";
-  }
+    if(isset($_POST['rent_button']))
+    {
+        $startDate = $_POST["start_date"];
+        $endDate = $_POST["end_date"];
+        $time = $_POST["time_pick"];
+        $totalPrice = 200;
+    
+        $renting = "INSERT INTO reservation (start_date, end_date, total_price, customer_id, plate_id, time) values ('$startDate', '$endDate', '$totalPrice','{$_SESSION['client_id']}', '$car_id', '$time');
+                    UPDATE car SET status = 'rented' WHERE plate_id = 12;";
+        mysqli_query($conn, $renting);
+        echo "<script>alert('Rent Successful!'); window.location='index.php'</script>";
+    }
 ?>
 
 <!DOCTYPE html>
@@ -146,7 +139,7 @@ $officeCountry = $officeRow['country'];
 		                <input type="text" class="form-control" id="time_pick" name="time_pick" placeholder="Time">
 		              </div>
 			            <div class="form-group">
-			              <input type="submit" value="Rent the Car Now" class="btn btn-secondary py-3 px-4">
+			              <input type="submit" name="rent_button" value="Rent the Car Now" class="btn btn-secondary py-3 px-4">
 			            </div>
 			    			</form>
 	  					</div>

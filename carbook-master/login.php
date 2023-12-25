@@ -1,6 +1,7 @@
 <?php
 require 'config.php';
-if($_SERVER['REQUEST_METHOD'] == 'POST'){
+if(isset($_POST['login']))
+{
   $email = $_POST["email"];
   $password = $_POST["password"];
 
@@ -14,7 +15,8 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
     if($hashed_password == $row["password"]){
       
       $_SESSION["login"] = true;
-      $_SESSION["client_name"] = $row["name"];
+      $_SESSION["client_id"] = $row["id"];
+      $_SESSION['client_name'] = $row["name"];
       header("Location: car.php");
 
     }else{
@@ -73,7 +75,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
       </div>
       
       <div class="form-group">
-        <input type="submit" value="Log in" class="btn btn-secondary py-3 px-4">
+        <input type="submit" name="login" value="Log in" class="btn btn-secondary py-3 px-4">
       </div>
 
       <p>Don't have an account? <a href="register.php">Sign up now</a></p>

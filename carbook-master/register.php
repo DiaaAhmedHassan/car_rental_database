@@ -18,16 +18,25 @@
         else
         {
             if($password == $confirm_password){
+                // inserting new user  
                 $query = "INSERT INTO CUSTOMER (name, email, phone_number, password) VALUES('$name', '$email', '$phone', '$hashed_password')";
                 mysqli_query($conn, $query);
-                $_SESSION['client_name'] = $_POST['name'];
+                
+                // retreving the new user's id (set by the database)
+                $query = "SELECT id FROM customer WHERE email = '$email'";
+                $result = mysqli_query($conn, $query);
+                $row = mysqli_fetch_assoc($result);
+
+                // saving the id in the session variables
+                $_SESSION['client_id'] = $row['id'];
+                $_SESSION['client_name'] = $row['name'];
                 echo"<script>alert(\"registeration succesfull\");</script>";
                 sleep(3);
                 header("Location: car.php");
             }
             else
             {
-            echo"<script>alert(\"password confirmation failed\");</script>";
+                echo"<script>alert(\"password confirmation failed\");</script>";
             }
         }
 

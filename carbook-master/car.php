@@ -1,6 +1,6 @@
 <?php
   require 'config.php';
-  if(empty($_SESSION['client_name']))
+  if(empty($_SESSION['client_id']))
   {
     header("Location: login.php");
   }
@@ -85,11 +85,12 @@
     		<div class="row">
 
 				<?php
-          include("config.php");
-					include("fetch.php");
+                    include("config.php");
+					$q = "SELECT * FROM car";
+                    $result = mysqli_query($conn, $q);
 					while($row = mysqli_fetch_assoc($result))
 					{
-            $car_id = $row['plate_id'];
+                        $car_id = $row['plate_id'];
 						$car_model = $row['model'];
 						$car_status = $row['status'];
 						$car_img = $row['image'];
@@ -107,7 +108,13 @@
 								</span>
 	    						<p class="price ml-auto"><?php echo "$$car_price"; ?> <span>/day</span></p>
     						</div>
-    						<p class="d-flex mb-0 d-block"><?php echo "<a onclick=\"viewCar({$car_id})\" class=\"btn btn-secondary py-2 ml-1\">Details</a>" ?></p>
+    						<p class="d-flex mb-0 d-block">
+                                <form action="single_car.php" method="get">
+                                    <input type="text" name="car_id" style="visibility: hidden;" value="<?php echo "$car_id";?>">
+                                    <input type="submit" value="Details" style="width: 100%;" class="btn btn-secondary py-2 ml-1">
+                                </form>
+                                <!-- <?php echo "<a style=\"width: 100%;\" onclick=\"viewCar({$car_id})\" class=\"btn btn-secondary py-2 ml-1\">Details</a>"?> -->
+                            </p>
     					</div>
     				</div>
     			</div>

@@ -1,8 +1,6 @@
 <?php
-    $car_id = $_GET['car_id'];
-
     include("config.php");
-
+    $car_id = $_GET['car_id'];
     $query = "SELECT * FROM car WHERE plate_id = $car_id";
     $result = mysqli_query($conn, $query);
     $car = mysqli_fetch_assoc($result);
@@ -95,9 +93,13 @@
       				<div class="text text-center">
       					<span class="subheading"><?php echo "$car_manufacturer"; ?></span>
       					<h2><?php echo "$car_model";?></h2>
-						 <p><?php 
-						 echo "<a onclick=\"rentCar({$car_id})\"> Rent now</a>"
-						 ?></p>
+						<p>
+							<form action="single_car.php" method="get">
+								<input type="text" name="car_id" style="visibility: hidden;" value="<?php echo "$car_id";?>">
+								<input type="submit" value="Rent Now" style="margin: auto;" class="btn btn-secondary py-2 ml-1">
+							</form>
+							<!-- <?php echo "<a onclick=\"rentCar({$car_id})\" class=\"btn btn-secondary py-2 ml-1\"> Rent now</a>"?> -->
+						</p>
       				</div>
       			</div>
       		</div>
