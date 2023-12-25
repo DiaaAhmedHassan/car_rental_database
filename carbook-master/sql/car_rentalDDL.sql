@@ -4,7 +4,7 @@ use Car_rental;
 
 
 create table office (
-    id int PRIMARY KEY,
+    id int AUTO_INCREMENT PRIMARY KEY,
     name varchar(225),
     country varchar(225),
     phone_number int
@@ -38,6 +38,7 @@ create table reservation (
     total_price int,
     customer_id int,
     plate_id int,
+    time varchar(6);
     PRIMARY KEY(customer_id, plate_id),
     FOREIGN KEY(plate_id) REFERENCES car(plate_id),
     FOREIGN KEY(customer_id) REFERENCES customer(id)

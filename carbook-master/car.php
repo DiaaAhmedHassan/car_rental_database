@@ -35,16 +35,11 @@
     <link rel="stylesheet" href="css/style.css">
 
     <script>
-      function rentCar(carId){
-        window.location.href = "index.php?car_id=" + carId;
-      }
-    </script>
-    <script>
-      function viewCar(carId)
-      {
+      function viewCar(carId){
         window.location.href = "single_car.php?car_id=" + carId;
       }
     </script>
+    
 
   </head>
   <body>
@@ -112,7 +107,7 @@
 								</span>
 	    						<p class="price ml-auto"><?php echo "$$car_price"; ?> <span>/day</span></p>
     						</div>
-    						<p class="d-flex mb-0 d-block"><?php echo "<a onclick=\"rentCar({$car_id})\" class=\"btn btn-primary py-2 mr-1\">Rent now</a>"?> <?php echo "<a onclick=\"viewCar({$car_id})\" class=\"btn btn-secondary py-2 ml-1\">Details</a>" ?></p>
+    						<p class="d-flex mb-0 d-block"><?php echo "<a onclick=\"viewCar({$car_id})\" class=\"btn btn-secondary py-2 ml-1\">Details</a>" ?></p>
     					</div>
     				</div>
     			</div>

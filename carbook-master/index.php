@@ -2,7 +2,18 @@
 $car_id = $_GET['car_id'];
 include 'config.php';
 $q = "SELECT * FROM car WHERE plate_id = $car_id";
-    
+$result = mysqli_query($conn, $q);
+
+$row = mysqli_fetch_assoc($result);
+
+$q2 = "SELECT office.name, office.country FROM office WHERE {$row['office_id']} = office.id";
+
+$officeData = mysqli_query($conn, $q2);
+
+$officeRow = mysqli_fetch_assoc($officeData);
+
+$officeName = $officeRow['name'];
+$officeCountry = $officeRow['country'];
 
 ?>
 
@@ -89,13 +100,14 @@ $q = "SELECT * FROM car WHERE plate_id = $car_id";
 	  						<form action="#" class="request-form ftco-animate bg-primary">
 		          		<h2>Make your trip</h2>
 			    				<div class="form-group">
-			    					<label for="" class="label">Pick-up location</label>
-			    					<input type="text" class="form-control" placeholder="City, Airport, Station, etc">
+			    					<label for="" class="label">country</label>
+			    					<input type="text" class="form-control" placeholder="country" value="<?php echo "$officeCountry"?>" disabled>
 			    				</div>
-			    				<div class="form-group">
-			    					<label for="" class="label">Drop-off location</label>
-			    					<input type="text" class="form-control" placeholder="City, Airport, Station, etc">
+                  <div class="form-group">
+			    					<label for="" class="label">office</label>
+			    					<input type="text" class="form-control" placeholder="office" value="<?php echo "$officeName"?>" disabled>
 			    				</div>
+			    			
 			    				<div class="d-flex">
 			    					<div class="form-group mr-2">
 			                <label for="" class="label">Pick-up date</label>
@@ -106,6 +118,10 @@ $q = "SELECT * FROM car WHERE plate_id = $car_id";
 			                <input type="text" class="form-control" id="book_off_date" placeholder="Date">
 			              </div>
 		              </div>
+                  <div class="form-group">
+			    					<label for="" class="label">total price</label>
+			    					<input type="text" class="form-control" placeholder="price">
+			    				</div>
 		              <div class="form-group">
 		                <label for="" class="label">Pick-up time</label>
 		                <input type="text" class="form-control" id="time_pick" placeholder="Time">

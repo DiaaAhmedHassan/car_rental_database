@@ -41,6 +41,13 @@
     <link rel="stylesheet" href="css/flaticon.css">
     <link rel="stylesheet" href="css/icomoon.css">
     <link rel="stylesheet" href="css/style.css">
+
+	<script>
+      function rentCar(carId){
+        window.location.href = "index.php?car_id=" + carId;
+      }
+    </script>
+	
   </head>
   <body>
     
@@ -88,6 +95,9 @@
       				<div class="text text-center">
       					<span class="subheading"><?php echo "$car_manufacturer"; ?></span>
       					<h2><?php echo "$car_model";?></h2>
+						 <p><?php 
+						 echo "<a onclick=\"rentCar({$car_id})\"> Rent now</a>"
+						 ?></p>
       				</div>
       			</div>
       		</div>
