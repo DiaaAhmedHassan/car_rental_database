@@ -8445,6 +8445,7 @@ h1, h2, h3, h4, h5,
   background: #fff;
   padding: 30px;
   z-index: 1;
+  color: rgba(0, 0, 0, 1);
   -webkit-border-radius: 5px;
   -moz-border-radius: 5px;
   -ms-border-radius: 5px;
@@ -8453,11 +8454,10 @@ h1, h2, h3, h4, h5,
   -moz-box-shadow: 0px 5px 12px -1px rgba(0, 0, 0, 0.06);
   box-shadow: 0px 5px 12px -1px rgba(0, 0, 0, 0.06); }
   .request-form h2 {
-    color: #fff;
     font-size: 22px;
     font-weight: 600; }
   .request-form p {
-    color: rgba(255, 255, 255, 0.8); }
+    color: rgba(0, 0, 0, 1); }
   .request-form .form-group {
     position: relative;
     width: 100%;
@@ -8483,7 +8483,6 @@ h1, h2, h3, h4, h5,
       width: 100%;
       display: block !important; }
   .request-form label.label {
-    color: #fff;
     font-size: 12px;
     text-transform: uppercase;
     font-weight: 600; }
@@ -9947,3 +9946,13 @@ textarea.form-control {
   100% {
     stroke-dasharray: 89, 200;
     stroke-dashoffset: -136px; } }
+
+.single-car-rent{
+  display: flex;
+}
+.single-car-rent div{
+  width: 100% !important;
+}
+.single-car-rent form{
+  width: 100% !important;
+}

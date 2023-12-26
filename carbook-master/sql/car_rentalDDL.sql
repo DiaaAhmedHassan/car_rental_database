@@ -39,7 +39,7 @@ create table reservation (
     customer_id int,
     plate_id int,
     time varchar(6),
-    PRIMARY KEY(customer_id, plate_id),
+    PRIMARY KEY(customer_id, plate_id, start_date),
     FOREIGN KEY(plate_id) REFERENCES car(plate_id),
     FOREIGN KEY(customer_id) REFERENCES customer(id)
 );
