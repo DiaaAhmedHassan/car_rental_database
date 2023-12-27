@@ -1,43 +1,62 @@
 <?php
-	include("config.php");
-
-	//querying the car
-	$car_id = $_GET['car_id'];
-	$query = "SELECT * FROM car WHERE plate_id = $car_id";
-	$result = mysqli_query($conn, $query);
-	$car = mysqli_fetch_assoc($result);
-	$car_model = $car['model'];
-	$car_img = $car['image'];
-	$car_mileage = $car['mileage'];
-	$car_manufacturer = $car['manufacturer'];
-	$car_status = $car['status'];
-	
-	if($car_status == "rented")
+	if(isset($_GET['details_button']))
 	{
-		$status = "disabled";
-		$rentButton = "Rented";
-		$buttonColor = "orange";
-	}
-	else if($car_status == 'maintenance')
-	{
-		$status = "disabled";
-		$rentButton = "Maintenance";
-		$buttonColor = "red";
-	}
-	else
-	{
-		$status = null;
-		$rentButton = "Rent Now!";
-		$buttonColor = "#01d28e";
+		include("config.php");
+
+		//querying the car
+		$car_id = $_GET['car_id'];
+		$query = "SELECT * FROM car WHERE plate_id = $car_id";
+		$result = mysqli_query($conn, $query);
+		$car = mysqli_fetch_assoc($result);
+		$car_model = $car['model'];
+		$car_img = $car['image'];
+		$car_mileage = $car['mileage'];
+		$car_manufacturer = $car['manufacturer'];
+		$car_status = $car['status'];
+		
+		if($car_status == "rented")
+		{
+			$status = "disabled";
+			$rentButton = "Rented";
+			$buttonColor = "orange";
+		}
+		else if($car_status == 'maintenance')
+		{
+			$status = "disabled";
+			$rentButton = "Maintenance";
+			$buttonColor = "red";
+		}
+		else
+		{
+			$status = null;
+			$rentButton = "Rent Now!";
+			$buttonColor = "#01d28e";
+		}
+
+		// querying the office
+		$q2 = "SELECT office.name, office.country FROM office WHERE {$car['office_id']} = office.id";
+		$officeData = mysqli_query($conn, $q2);
+		$officeRow = mysqli_fetch_assoc($officeData);
+		$officeName = $officeRow['name'];
+		$officeCountry = $officeRow['country'];
 	}
 
+	if(isset($_GET['rent_button']))
+    {
+        include "config.php";
+        $car_id = $_GET["car_id"];
+        $startDate = $_GET["start_date"];
+        $endDate = $_GET["end_date"];
+        $time = $_GET["time_pick"];
+        $totalPrice = 200;
 
-	// querying the office
-	$q2 = "SELECT office.name, office.country FROM office WHERE {$car['office_id']} = office.id";
-	$officeData = mysqli_query($conn, $q2);
-	$officeRow = mysqli_fetch_assoc($officeData);
-	$officeName = $officeRow['name'];
-	$officeCountry = $officeRow['country'];
+        $renting = "INSERT INTO reservation (start_date, end_date, total_price, customer_id, plate_id, time) values ('$startDate', '$endDate', '$totalPrice','{$_SESSION['client_id']}', '$car_id', '$time');";
+        mysqli_query($conn, $renting);
+        
+        $renting = "UPDATE car SET status = 'rented' WHERE plate_id = '$car_id;'";
+        mysqli_query($conn, $renting);
+        echo "<script>alert('Rent Successful!'); window.location='car.php';</script>";
+    }
 
 ?>
 
@@ -100,6 +119,7 @@
 		}
 		form p{
 			font-size: 16px;
+			margin-bottom: 0px;
 		}
 	</style>
 
@@ -154,10 +174,11 @@
 				<!-- country -->
 				<!-- office -->
 				<!-- price "at the end of the form" -->
-				<form action="rent_car.php" method="get" class="ftco-animate">
+				<form action="single_car.php" method="get" class="ftco-animate">
 					<h2><?php echo "$car_model"?></h2>
-					<p><?php echo "$car_manufacturer"?></p>
-					<p><label style="color: black;">Available at:</label> <?php echo "$officeCountry"?>, <?php echo "$officeName"?></p>
+					<p><label>Manufacurer:</label> <?php echo "$car_manufacturer"?></p>
+					<p><label>Available at:</label> <?php echo "$officeCountry"?>, <?php echo "$officeName"?></p>
+					<input type="hidden" name="car_id" value="<?php echo "$car_id";?>">
 					<div class="d-flex">
 						<div class="form-group mr-2">
 							<label for="" class="label">Start date</label>

@@ -110,8 +110,8 @@
     						</div>
     						<p class="d-flex mb-0 d-block">
                                 <form action="single_car.php" method="get">
-                                    <input type="text" name="car_id" style="visibility: hidden;" value="<?php echo "$car_id";?>">
-                                    <input type="submit" value="Details" style="width: 100%;" class="btn btn-secondary py-2 ml-1">
+                                    <input type="hidden" name="car_id" style="visibility: hidden;" value="<?php echo "$car_id";?>">
+                                    <input type="submit" name="details_button" value="Details" style="width: 100%;" class="btn btn-secondary py-2 ml-1">
                                 </form>
                                 <!-- <?php echo "<a style=\"width: 100%;\" onclick=\"viewCar({$car_id})\" class=\"btn btn-secondary py-2 ml-1\">Details</a>"?> -->
                             </p>
