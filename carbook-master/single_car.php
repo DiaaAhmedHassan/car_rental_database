@@ -67,8 +67,6 @@ function numberOfDays($sDate, $eDate){
         $time = $_GET["time_pick"];
 		$car_price = $_GET["car_price"];
 		
-		echo "<script>alert('car price is $car_price')</script>";
-
 		$nDays = numberOfDays($startDate, $endDate);
         $totalPrice = $nDays*$car_price;
 		
@@ -77,7 +75,7 @@ function numberOfDays($sDate, $eDate){
         
         $renting = "UPDATE car SET status = 'rented' WHERE plate_id = '$car_id;'";
         mysqli_query($conn, $renting);
-        echo "<script>window.location='car.php'; alert('Rent Successful!'); </script>";
+        echo "<script>window.location='car.php'; alert('Rent Successful total price will be: $car_price!'); </script>";
     }
 
 ?>

@@ -29,7 +29,7 @@
 
                 // saving the id in the session variables
                 $_SESSION['client_id'] = $row['id'];
-                $_SESSION['client_name'] = $row['name'];
+                $_SESSION['client_name'] = $name;
                 echo"<script>alert(\"registeration succesfull\");</script>";
                 sleep(3);
                 header("Location: car.php");
