@@ -77,33 +77,33 @@
   
   <div class="container">
     <form action="register.php" method="post" class="request-form ftco-animate bg-primary fadeInUp ftco-animated">
-      <h2>Welcome to AutoRent</h2>
+      <h2 style="color: white">Welcome to AutoRent</h2>
       <div class="form-group">
-        <label for="" class="label">User name</label>
+        <label style="color: white" for="" class="label">User name</label>
         <input type="text" class="form-control" placeholder="Enter Your name" name="name">
       </div>
       <div class="form-group">
-        <label for="" class="label">Email</label>
+        <label style="color: white" for="" class="label">Email</label>
         <input type="email" class="form-control" placeholder="Enter Your Email" name="email">
       </div>
       <div class="form-group">
-        <label for="" class="label">phone</label>
+        <label style="color: white" for="" class="label">phone</label>
         <input type="text" class="form-control" placeholder="Enter Your phone number" name="phone">
       </div>
       
       <div class="form-group">
-        <label for="" class="label">Password</label>
+        <label style="color: white" for="" class="label">Password</label>
         <input type="password" class="form-control" placeholder="Enter Password" name="password">
       </div>
       <div class="form-group">
-        <label for="" class="label">confirm Password</label>
+        <label style="color: white" for="" class="label">confirm Password</label>
         <input type="password" class="form-control" placeholder="confirm your password" name="confirm_password">
       </div>
       <div class="form-group">
         <input type="submit" name="register" value="register" class="btn btn-secondary py-3 px-4">
       </div>
 
-      <p>already have an account? <a href="login.php">Sign in now</a></p>
+      <p style="color: white">already have an account? <a href="login.php">Sign in now</a></p>
     </form>
   </div>
 </body>

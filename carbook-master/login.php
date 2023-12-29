@@ -64,13 +64,13 @@ if(isset($_POST['login']))
 <body>
   <div class="container">
     <form action="#" method="post" class="request-form ftco-animate bg-primary fadeInUp ftco-animated">
-      <h2>Welcome to AutoRent</h2>
+      <h2 style="color: white">Welcome to AutoRent</h2>
       <div class="form-group">
-        <label for="" class="label">Email</label>
+        <label style="color: white" for="" class="label">Email</label>
         <input type="email" name="email" class="form-control" placeholder="Enter Your Email">
       </div>
       <div class="form-group">
-        <label for="" class="label">Password</label>
+        <label style="color: white" for="" class="label">Password</label>
         <input type="password" name="password" class="form-control" placeholder="Enter Password">
       </div>
       
@@ -78,7 +78,7 @@ if(isset($_POST['login']))
         <input type="submit" name="login" value="Log in" class="btn btn-secondary py-3 px-4">
       </div>
 
-      <p>Don't have an account? <a href="register.php">Sign up now</a></p>
+      <p style="color: white">Don't have an account? <a href="register.php">Sign up now</a></p>
     </form>
   </div>
 
