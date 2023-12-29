@@ -1,7 +1,17 @@
 <?php
+include("config.php");
+function numberOfDays($sDate, $eDate){
+	$sDate = strtotime($sDate);
+	$eDate = strtotime($eDate);
+
+	$noDays = round(($eDate - $sDate)/(60*60*24));
+
+	return $noDays;
+}
+
 	if(isset($_GET['details_button']))
 	{
-		include("config.php");
+		
 
 		//querying the car
 		$car_id = $_GET['car_id'];
@@ -11,9 +21,12 @@
 		$car_model = $car['model'];
 		$car_img = $car['image'];
 		$car_mileage = $car['mileage'];
+		$car_price = $car['price'];
 		$car_manufacturer = $car['manufacturer'];
 		$car_status = $car['status'];
 		
+		
+
 		if($car_status == "rented")
 		{
 			$status = "disabled";
@@ -41,21 +54,30 @@
 		$officeCountry = $officeRow['country'];
 	}
 
+
+
 	if(isset($_GET['rent_button']))
     {
-        include "config.php";
+		
+
+       // include "config.php";
         $car_id = $_GET["car_id"];
         $startDate = $_GET["start_date"];
         $endDate = $_GET["end_date"];
         $time = $_GET["time_pick"];
-        $totalPrice = 200;
+		$car_price = $_GET["car_price"];
+		
+		echo "<script>alert('car price is $car_price')</script>";
 
+		$nDays = numberOfDays($startDate, $endDate);
+        $totalPrice = $nDays*$car_price;
+		
         $renting = "INSERT INTO reservation (start_date, end_date, total_price, customer_id, plate_id, time) values ('$startDate', '$endDate', '$totalPrice','{$_SESSION['client_id']}', '$car_id', '$time');";
         mysqli_query($conn, $renting);
         
         $renting = "UPDATE car SET status = 'rented' WHERE plate_id = '$car_id;'";
         mysqli_query($conn, $renting);
-        echo "<script>alert('Rent Successful!'); window.location='car.php';</script>";
+        echo "<script>window.location='car.php'; alert('Rent Successful!'); </script>";
     }
 
 ?>
@@ -193,7 +215,10 @@
 						<label for="" class="label">Pick-up time</label>
 						<input type="text" class="form-control" id="time_pick" name="time_pick" placeholder="Time">
 					</div>
-					<p><label style="color: black;">Price/Day:</label> <?php echo "$"?></p>
+					<p style="margin: 0; paddin: 0">
+					<label style="color: black;">Price/Day:</label> 
+					<input type="text" id="car_price" style="border: none; background: none" readonly name="car_price" value="<?php echo $car_price?>"/>
+					</p>
 					<div class="form-group">
 						<input type="submit" name="rent_button" value="<?php echo "$rentButton" ?>" class="btn btn-secondary py-3 px-4"style="background: <?php echo "$buttonColor"?> !important; border: none !important;" <?php echo "$status"?>>
 					</div>
