@@ -8842,7 +8842,6 @@ h1, h2, h3, h4, h5,
   overflow-x: scroll; }
 
 .table {
-  min-width: 1000px !important;
   width: 100%; }
   .table th {
     font-weight: 500; }
@@ -8854,7 +8853,8 @@ h1, h2, h3, h4, h5,
       border: 1px solid transparent !important; }
       .table .thead-primary tr th.heading {
         border-right: 1px solid #fff !important;
-        position: relative; }
+        position: relative; 
+        max-width: 200px !important;} 
         .table .thead-primary tr th.heading:last-child {
           border-right: none !important; }
         .table .thead-primary tr th.heading:after {

@@ -4,6 +4,9 @@
   {
     header("Location: login.php");
   }
+
+  $q = "CALL update_car_status();";
+  mysqli_query($conn, $q);
 ?>
 
 <!DOCTYPE html>
@@ -85,12 +88,12 @@
     		<div class="row">
 
 				<?php
-                    include("config.php");
+          include("config.php");
 					$q = "SELECT * FROM car";
-                    $result = mysqli_query($conn, $q);
+          $result = mysqli_query($conn, $q);
 					while($row = mysqli_fetch_assoc($result))
 					{
-                        $car_id = $row['plate_id'];
+            $car_id = $row['plate_id'];
 						$car_model = $row['model'];
 						$car_status = $row['status'];
 						$car_img = $row['image'];

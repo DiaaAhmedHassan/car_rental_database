@@ -41,7 +41,21 @@ create table reservation (
     time varchar(6),
     PRIMARY KEY(customer_id, plate_id, start_date),
     FOREIGN KEY(plate_id) REFERENCES car(plate_id),
-    FOREIGN KEY(customer_id) REFERENCES customer(id)
+    FOREIGN KEY(customer_id) REFERENCES customer(id)   
+);
+
+CREATE ASSERTION no_overlapping_dates
+CHECK (
+	NOT EXISTS (
+    	SELECT *
+        FROM reservation AS o, reservation as n
+        WHERE o.plate_id = n.plate_id -- the same car
+        AND (
+                (n.start_date BETWEEN o.start_date AND o.end_date) -- new reservation start date in an existing reservation
+                OR
+                (n.end_date BETWEEN o.start_date AND o.end_date) -- new reservation end date in an existing reservation
+        )
+    )
 );
 
 create table address (
@@ -51,6 +65,46 @@ create table address (
     PRIMARY KEY(id, country),
     FOREIGN KEY(id) REFERENCES customer(id)
 );
+
+DELIMITER $$
+CREATE PROCEDURE update_car_status()
+        BEGIN
+            SET @now:= CURRENT_DATE();
+
+            UPDATE car
+            SET car.status = 'available'
+            WHERE plate_id IN (
+                SELECT plate_id
+                FROM reservation
+                WHERE end_date <= @now
+                OR start_date > @now
+            )
+            OR plate_id NOT IN (
+            	SELECT plate_id
+                FROM reservation
+            );
+
+            UPDATE car
+            SET car.status = 'rented'
+            WHERE car.plate_id IN (
+                SELECT r.plate_id
+                FROM reservation as r
+                WHERE r.start_date <= @now
+                AND r.end_date > @now
+            );
+        END $$
+DELIMITER ;
+SET GLOBAL init_connect = 'CALL update_car_status()';
+
+CREATE TRIGGER new_reservation
+BEFORE INSERT ON reservation
+FOR EACH ROW
+CALL update_car_status();
+
+CREATE TRIGGER new_res
+BEFORE INSERT ON reservation
+FOR EACH ROW
+
 
 /*
     table creation, primary keys by Mohammed Mohab and Diaa Ahmad

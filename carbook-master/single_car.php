@@ -73,8 +73,8 @@ function numberOfDays($sDate, $eDate){
         $renting = "INSERT INTO reservation (start_date, end_date, total_price, customer_id, plate_id, time) values ('$startDate', '$endDate', '$totalPrice','{$_SESSION['client_id']}', '$car_id', '$time');";
         mysqli_query($conn, $renting);
         
-        $renting = "UPDATE car SET status = 'rented' WHERE plate_id = '$car_id;'";
-        mysqli_query($conn, $renting);
+        $q = "CALL update_car_status();";
+  		mysqli_query($conn, $q);
         echo "<script>window.location='car.php'; alert('Rent Successful total price will be: $car_price!'); </script>";
     }
 
