@@ -27,7 +27,6 @@
     <link rel="stylesheet" href="css/style.css">
 
 	<style>
-
         html, body{
             height: 100%;
         }
@@ -97,6 +96,67 @@
           color: red;
         }
     </style>
+    <script>
+      const option1 = document.getElementById("option1");
+      const option2 = document.getElementById("option2");
+      const option3 = document.getElementById("option3");
+      const text1 = document.getElementById("text1");
+      const text2 = document.getElementById("text2");
+      const text3 = document.getElementById("text3");
+      const text4 = document.getElementById("text4");
+
+      function option1Change(e){
+        if(e.checked){
+          text1.disabled=false;
+          text2.disabled=false;
+        } else{
+          text1.disabled=true;
+        }
+      };
+      function option2Change(e) {
+        if(e.checked){
+          text3.disabled = false;
+        } else{
+          text3.disabled = true;
+        }
+      };
+      function option3Change(e){
+        if(e.checked){
+          text4.disabled = false;
+        } else{
+          text4.disabled = true;
+        }
+      };
+
+      // option1.addEventListener('change', () =>{
+      //   if(option1.checked){
+      //     text1.disabled = false;
+      //     text2.disabled = false;
+      //   }
+      //   else{
+      //     text1.disabled = true;
+      //     text2.disabled = true;
+      //   }
+      // });
+
+      // option2.addEventListener('change', () =>{
+      //   if(option2.checked){
+      //     text3.disabled = false;
+      //   }
+      //   else{
+      //     text3.disabled = true;
+      //   }
+      // });
+
+      // option3.addEventListener('change', () => {
+      //   if(option3.checked){
+      //     text4.disabled = false;
+      //   }
+      //   else{
+      //     text4.disabled = true;
+      //   }
+      // });
+    </script>
   </head>
   <body>
     
@@ -140,20 +200,20 @@
           <form>
             <h2 style="text-align: left !important;">Filters</h2>
             <div class="sidebar_option">
-              <input type="radio" id="option1" name="group1" value="option1">
+              <input type="radio" id="option1" name="group1" value="option1" onchange="option1Change(this)">
               <label for="option1">Show Reservation</label><br>
-              <input type="text" name="start_date" placeholder="Start Date">
-              <input type="text" name="end_date" placeholder="End Date">
+              <input type="text" name="start_date" placeholder="Start Date" id="text1" disabled>
+              <input type="text" name="end_date" placeholder="End Date" id="text2" disabled>
             </div>
             <div class="sidebar_option">
-              <input type="radio" id="option1" name="group1" value="option1">
+              <input type="radio" id="option2" name="group1" value="option2" onchange="option2Change(this)">
               <label for="option1">Show Car Status</label><br>
-              <input type="text" name="start_date" placeholder="Choose Date">
+              <input type="text" name="start_date" placeholder="Choose Date" id="text3" disabled>
             </div>
             <div class="sidebar_option">
-              <input type="radio" id="option1" name="group1" value="option1">
+              <input type="radio" id="option3" name="group1" value="option3" onchange="option3Change(this)">
               <label for="option1">Show Customer</label><br>
-              <input type="text" name="start_date" placeholder="Customer id">
+              <input type="text" name="start_date" placeholder="Customer id" id="text4" disabled>
             </div>
             <input type="submit" value="GO" style="width: 90% !important; margin: 0px auto;" class="btn btn-secondary">
           </form>        

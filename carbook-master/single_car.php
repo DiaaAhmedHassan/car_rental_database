@@ -75,7 +75,11 @@ function numberOfDays($sDate, $eDate){
         
         $q = "CALL update_car_status();";
   		mysqli_query($conn, $q);
-        echo "<script>window.location='car.php'; alert('Rent Successful total price will be: $car_price!'); </script>";
+
+		$q = "SELECT * FROM reservation AS r WHERE r.start_date = '$startDate' AND r.end_date = '$endDate' AND r.plate_id = '$car_id'";
+		$result = mysqli_query($conn, $q);
+		$row = mysqli_fetch_assoc($result);
+        echo "<script>window.location='car.php'; alert('Rent Successful total price will be: \${$row['total_price']}'); </script>";
     }
 
 ?>
@@ -213,7 +217,7 @@ function numberOfDays($sDate, $eDate){
 						<label for="" class="label">Pick-up time</label>
 						<input type="text" class="form-control" id="time_pick" name="time_pick" placeholder="Time">
 					</div>
-					<p style="margin: 0; paddin: 0">
+					<p style="margin: 0; padding: 0;">
 					<label style="color: black;">Price/Day:</label> 
 					<input type="text" id="car_price" style="border: none; background: none" readonly name="car_price" value="<?php echo $car_price?>"/>
 					</p>
