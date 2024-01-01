@@ -17,7 +17,7 @@
         }
         else
         {
-            if($password == $confirm_password){
+            if($password == $confirm_password && !empty($password)){
                 // inserting new user  
                 $query = "INSERT INTO CUSTOMER (name, email, phone_number, password) VALUES('$name', '$email', '$phone', '$hashed_password')";
                 mysqli_query($conn, $query);
