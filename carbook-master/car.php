@@ -60,7 +60,7 @@
 	          <li class="nav-item"><a href="about.html" class="nav-link">About</a></li>
 	          <li class="nav-item"><a href="car-registeration.php" class="nav-link">add a car</a></li>
 	          <li class="nav-item"><a href="pricing.html" class="nav-link">Pricing</a></li>
-	          <li class="nav-item active"><a href="car.html" class="nav-link">Cars</a></li>
+	          <li class="nav-item active"><a href="car.php" class="nav-link">Cars</a></li>
 	          <li class="nav-item"><a href="blog.html" class="nav-link">Blog</a></li>
 	          <li class="nav-item"><a href="contact.html" class="nav-link">Contact</a></li>
             <li class="nav-item"><a href="logout.php" class="nav-link">Logout</a></li>
@@ -123,6 +123,7 @@
     			</div>
 				<?php } ?>
     		</div>
+        
     		<div class="row mt-5">
           <div class="col text-center">
             <div class="block-27">
@@ -227,6 +228,6 @@
   <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor=false"></script>
   <script src="js/google-map.js"></script>
   <script src="js/main.js"></script>
-    <?php mysqli_close($conn);?>
+  <?php mysqli_close($conn);?>
   </body>
 </html>
