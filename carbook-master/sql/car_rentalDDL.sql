@@ -44,19 +44,6 @@ create table reservation (
     FOREIGN KEY(customer_id) REFERENCES customer(id)   
 );
 
-CREATE ASSERTION no_overlapping_dates
-CHECK (
-	NOT EXISTS (
-    	SELECT *
-        FROM reservation AS o, reservation as n
-        WHERE o.plate_id = n.plate_id -- the same car
-        AND (
-                (n.start_date BETWEEN o.start_date AND o.end_date) -- new reservation start date in an existing reservation
-                OR
-                (n.end_date BETWEEN o.start_date AND o.end_date) -- new reservation end date in an existing reservation
-        )
-    )
-);
 
 create table address (
     id int,
@@ -95,17 +82,6 @@ CREATE PROCEDURE update_car_status()
         END $$
 DELIMITER ;
 SET GLOBAL init_connect = 'CALL update_car_status()';
-
-CREATE TRIGGER new_reservation
-BEFORE INSERT ON reservation
-FOR EACH ROW
-CALL update_car_status();
-
-CREATE TRIGGER new_res
-BEFORE INSERT ON reservation
-FOR EACH ROW
-
-
 /*
     table creation, primary keys by Mohammed Mohab and Diaa Ahmad
     foreign keys by Youssef Mahmoud

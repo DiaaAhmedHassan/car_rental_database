@@ -72,32 +72,34 @@
     <link rel="stylesheet" href="css/icomoon.css">
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/login.css">
+
+    <script src="register_validation.js"> </script>
   </head>
 <body>
   
   <div class="container">
-    <form action="register.php" method="post" class="request-form ftco-animate bg-primary fadeInUp ftco-animated">
+    <form action="register.php" method="post" onsubmit ="valid_register()" class="request-form ftco-animate bg-primary fadeInUp ftco-animated">
       <h2 style="color: white">Welcome to AutoRent</h2>
       <div class="form-group">
         <label style="color: white" for="" class="label">User name</label>
-        <input type="text" class="form-control" placeholder="Enter Your name" name="name">
+        <input type="text" id="name" class="form-control" placeholder="Enter Your name" name="name">
       </div>
       <div class="form-group">
         <label style="color: white" for="" class="label">Email</label>
-        <input type="email" class="form-control" placeholder="Enter Your Email" name="email">
+        <input type="email" id="email" class="form-control" placeholder="Enter Your Email" name="email">
       </div>
       <div class="form-group">
         <label style="color: white" for="" class="label">phone</label>
-        <input type="text" class="form-control" placeholder="Enter Your phone number" name="phone">
+        <input type="text" id="phone" class="form-control" placeholder="Enter Your phone number" name="phone">
       </div>
       
       <div class="form-group">
         <label style="color: white" for="" class="label">Password</label>
-        <input type="password" class="form-control" placeholder="Enter Password" name="password">
+        <input type="password" id="password" class="form-control" placeholder="Enter Password" name="password">
       </div>
       <div class="form-group">
         <label style="color: white" for="" class="label">confirm Password</label>
-        <input type="password" class="form-control" placeholder="confirm your password" name="confirm_password">
+        <input type="password" id="confirm_password" class="form-control" placeholder="confirm your password" name="confirm_password">
       </div>
       <div class="form-group">
         <input type="submit" name="register" value="register" class="btn btn-secondary py-3 px-4">

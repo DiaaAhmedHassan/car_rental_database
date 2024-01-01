@@ -59,29 +59,30 @@ if(isset($_POST['login']))
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/login.css">
 
+    <script src="login_validation.js"> </script>
+
 
   </head>
 <body>
   <div class="container">
-    <form action="#" method="post" class="request-form ftco-animate bg-primary fadeInUp ftco-animated">
+    <form action="car.php" method="post" onsubmit ="valid_login()" class="request-form ftco-animate bg-primary fadeInUp ftco-animated">
       <h2 style="color: white">Welcome to AutoRent</h2>
       <div class="form-group">
         <label style="color: white" for="" class="label">Email</label>
-        <input type="email" name="email" class="form-control" placeholder="Enter Your Email">
+        <input type="email" id="email" name="email" class="form-control" placeholder="Enter Your Email">
       </div>
       <div class="form-group">
         <label style="color: white" for="" class="label">Password</label>
-        <input type="password" name="password" class="form-control" placeholder="Enter Password">
+        <input type="password" id="password" name="password" class="form-control" placeholder="Enter Password">
       </div>
       
       <div class="form-group">
-        <input type="submit" name="login" value="Log in" class="btn btn-secondary py-3 px-4">
+        <input type="submit" id="submit" name="login" value="Log in" class="btn btn-secondary py-3 px-4">
       </div>
 
       <p style="color: white">Don't have an account? <a href="register.php">Sign up now</a></p>
     </form>
   </div>
-
   
 </body>
 </html>
