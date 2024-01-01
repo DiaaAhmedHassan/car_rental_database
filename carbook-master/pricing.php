@@ -96,67 +96,7 @@
           color: red;
         }
     </style>
-    <script>
-      const option1 = document.getElementById("option1");
-      const option2 = document.getElementById("option2");
-      const option3 = document.getElementById("option3");
-      const text1 = document.getElementById("text1");
-      const text2 = document.getElementById("text2");
-      const text3 = document.getElementById("text3");
-      const text4 = document.getElementById("text4");
 
-      function option1Change(e){
-        if(e.checked){
-          text1.disabled=false;
-          text2.disabled=false;
-        } else{
-          text1.disabled=true;
-        }
-      };
-      function option2Change(e) {
-        if(e.checked){
-          text3.disabled = false;
-        } else{
-          text3.disabled = true;
-        }
-      };
-      function option3Change(e){
-        if(e.checked){
-          text4.disabled = false;
-        } else{
-          text4.disabled = true;
-        }
-      };
-
-      // option1.addEventListener('change', () =>{
-      //   if(option1.checked){
-      //     text1.disabled = false;
-      //     text2.disabled = false;
-      //   }
-      //   else{
-      //     text1.disabled = true;
-      //     text2.disabled = true;
-      //   }
-      // });
-
-      // option2.addEventListener('change', () =>{
-      //   if(option2.checked){
-      //     text3.disabled = false;
-      //   }
-      //   else{
-      //     text3.disabled = true;
-      //   }
-      // });
-
-      // option3.addEventListener('change', () => {
-      //   if(option3.checked){
-      //     text4.disabled = false;
-      //   }
-      //   else{
-      //     text4.disabled = true;
-      //   }
-      // });
-    </script>
   </head>
   <body>
     
@@ -172,8 +112,8 @@
 	          <li class="nav-item"><a href="index.html" class="nav-link">Home</a></li>
 	          <li class="nav-item"><a href="about.html" class="nav-link">About</a></li>
 	          <li class="nav-item"><a href="services.html" class="nav-link">Services</a></li>
-	          <li class="nav-item active"><a href="pricing.html" class="nav-link">Pricing</a></li>
-	          <li class="nav-item"><a href="car.html" class="nav-link">Cars</a></li>
+	          <li class="nav-item active"><a href="pricing.php" class="nav-link">Pricing</a></li>
+	          <li class="nav-item"><a href="car.php" class="nav-link">Cars</a></li>
 	          <li class="nav-item"><a href="blog.html" class="nav-link">Blog</a></li>
 	          <li class="nav-item"><a href="contact.html" class="nav-link">Contact</a></li>
 	        </ul>
@@ -200,18 +140,18 @@
           <form>
             <h2 style="text-align: left !important;">Filters</h2>
             <div class="sidebar_option">
-              <input type="radio" id="option1" name="group1" value="option1" onchange="option1Change(this)">
+              <input type="radio" id="option1" name="group1" value="option1" onclick="choose()">
               <label for="option1">Show Reservation</label><br>
               <input type="text" name="start_date" placeholder="Start Date" id="text1" disabled>
               <input type="text" name="end_date" placeholder="End Date" id="text2" disabled>
             </div>
             <div class="sidebar_option">
-              <input type="radio" id="option2" name="group1" value="option2" onchange="option2Change(this)">
+              <input type="radio" id="option2" name="group1" value="option2" onclick="choose()">
               <label for="option1">Show Car Status</label><br>
               <input type="text" name="start_date" placeholder="Choose Date" id="text3" disabled>
             </div>
             <div class="sidebar_option">
-              <input type="radio" id="option3" name="group1" value="option3" onchange="option3Change(this)">
+              <input type="radio" id="option3" name="group1" value="option3" onclick="choose()">
               <label for="option1">Show Customer</label><br>
               <input type="text" name="start_date" placeholder="Customer id" id="text4" disabled>
             </div>
@@ -381,6 +321,82 @@
   <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor=false"></script>
   <script src="js/google-map.js"></script>
   <script src="js/main.js"></script>
+
+  <script>
+
+function choose() {
+var option1 = document.getElementById("option1");
+var option2 = document.getElementById("option2");
+var option3 = document.getElementById("option3");
+var text1 = document.getElementById("text1");
+var text2 = document.getElementById("text2");
+var text3 = document.getElementById("text3");
+var text4 = document.getElementById("text4");
+
+text1.disabled = option1.checked? false: true;
+
+text2.disabled = option1.checked? false: true;
+
+text3.disabled = option2.checked? false: true;
+
+text4.disabled = option3.checked? false: true;
+
+}
+
+
+
+// function option1Change(e){
+//   if(e.checked){
+//     text1.disabled=false;
+//     text2.disabled=false;
+//   } else{
+//     text1.disabled=true;
+//   }
+// };
+// function option2Change(e) {
+//   if(e.checked){
+//     text3.disabled = false;
+//   } else{
+//     text3.disabled = true;
+//   }
+// };
+// function option3Change(e){
+//   if(e.checked){
+//     text4.disabled = false;
+//   } else{
+//     text4.disabled = true;
+//   }
+// };
+
+// option1.addEventListener('change', () =>{
+//   if(option1.checked){
+//     text1.disabled = false;
+//     text2.disabled = false;
+//   }
+//   else{
+//     text1.disabled = true;
+//     text2.disabled = true;
+//   }
+// });
+
+// option2.addEventListener('change', () =>{
+//   if(option2.checked){
+//     text3.disabled = false;
+//   }
+//   else{
+//     text3.disabled = true;
+//   }
+// });
+
+// option3.addEventListener('change', () => {
+//   if(option3.checked){
+//     text4.disabled = false;
+//   }
+//   else{
+//     text4.disabled = true;
+//   }
+// });
+</script>
     
   </body>
 </html>
