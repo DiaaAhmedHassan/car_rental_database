@@ -334,12 +334,35 @@ var text3 = document.getElementById("text3");
 var text4 = document.getElementById("text4");
 
 text1.disabled = option1.checked? false: true;
+if(text1.disabled == false){
+  text1.style.backgroundColor = "white";
+}else{
+  text1.style.backgroundColor = "#D3D3D3";
+}
 
 text2.disabled = option1.checked? false: true;
+if(text2.disabled == false){
+  text2.style.backgroundColor = "white";
+}else{
+  text2.style.backgroundColor = "#D3D3D3";
+}
+
 
 text3.disabled = option2.checked? false: true;
+if(text3.disabled == false){
+  text3.style.backgroundColor = "white";
+}else{
+  text3.style.backgroundColor = "#D3D3D3";
+}
 
 text4.disabled = option3.checked? false: true;
+if(text4.disabled == false){
+  text4.style.backgroundColor = "white";
+}else{
+  text4.style.backgroundColor = "#D3D3D3";
+}
+
+
 
 }
 
