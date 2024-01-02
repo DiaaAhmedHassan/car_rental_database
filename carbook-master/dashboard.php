@@ -208,7 +208,7 @@ if(isset($_POST['car_register'])){
                         class="btn btn-secondary">
                 </form>
             </div>
-            <form action="dashboard.php" method="POST" class="new_car_form">
+            <form action="dashboard.php" method="POST" class="new_car_form" onsubmit ="valid_dash_board()">
                 <h2 style="grid-column: 1; grid-row: 1;">Add New Car</h2>
                 <div class="up_group" style="grid-column: 1; grid-row: 1; margin:10px;">
                     <div class="group">
@@ -382,6 +382,10 @@ if(isset($_POST['car_register'])){
             text1.disabled = option1.checked ? false : true;
             if (text1.disabled == false) {
                 text1.style.backgroundColor = "white";
+                if(text1 == "" ){
+                    alert("please insert a start date");
+                    return false;
+                }
             } else {
                 text1.style.backgroundColor = "#D3D3D3";
             }
@@ -389,6 +393,10 @@ if(isset($_POST['car_register'])){
             text2.disabled = option1.checked ? false : true;
             if (text2.disabled == false) {
                 text2.style.backgroundColor = "white";
+                if(text2 == ""){
+                    alert("please insert a end date");
+                    return false;
+                }
             } else {
                 text2.style.backgroundColor = "#D3D3D3";
             }
@@ -397,6 +405,10 @@ if(isset($_POST['car_register'])){
             text3.disabled = option2.checked ? false : true;
             if (text3.disabled == false) {
                 text3.style.backgroundColor = "white";
+                if(text3 == ""){
+                    alert("please insert a correct date");
+                    return false;
+                }
             } else {
                 text3.style.backgroundColor = "#D3D3D3";
             }
@@ -404,6 +416,10 @@ if(isset($_POST['car_register'])){
             text4.disabled = option3.checked ? false : true;
             if (text4.disabled == false) {
                 text4.style.backgroundColor = "white";
+                if(text4 == "" || !isInteger(text4)){
+                    alert("please insert a id");
+                    return false;
+                }
             } else {
                 text4.style.backgroundColor = "#D3D3D3";
             }
@@ -411,6 +427,9 @@ if(isset($_POST['car_register'])){
             text5.disabled = option4.checked ? false : true;
             if (text5.disabled == false) {
                 text5.style.backgroundColor = "white";
+                if(text5 == ""){
+                    alert("please insert a start date");
+                    return false;}
             } else {
                 text5.style.backgroundColor = "#D3D3D3";
             }
@@ -419,11 +438,16 @@ if(isset($_POST['car_register'])){
 
             if (text6.disabled == false) {
                 text6.style.backgroundColor = "white";
+                if(text6 == ""){
+                    alert("please insert a end date");
+                    return false;
             } else {
                 text6.style.backgroundColor = "#D3D3D3";
             }
         }
+        }
     </script>
+    <script src="dash_board_validation.js"></script>
 </body>
 
 </html>
