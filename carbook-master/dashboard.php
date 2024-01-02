@@ -185,12 +185,6 @@ if (isset($_POST['car_register'])) {
                         <label for="option1">Show Customer</label><br>
                         <input type="text" name="email" placeholder="Customer email" id="text4" disabled>
                     </div>
-                    <div class="sidebar_option">
-                        <input type="radio" id="option4" name="group" value="4" onclick="choose()">
-                        <label for="option4">Show Customer</label><br>
-                        <input type="text" name="start_date" placeholder="Start Date" id="text5" disabled>
-                        <input type="text" name="end_date" placeholder="End Date" id="text6" disabled>
-                    </div>
                     <input type="submit" name="filter_button" value="GO" style="width: 90% !important; margin: 0px auto;" class="btn btn-secondary">
                 </form>
             </div>
@@ -232,7 +226,7 @@ if (isset($_POST['car_register'])) {
                     <div class="file_group" style="grid-column: 3;">
                         <input type="hidden">
                         <img src="images/upload.jpg" id="image" style="width: 300px; height: 175px; margin: 10px;" />
-                        <label for="file" class="btn btn-secondary py-3 px-4" style="height: 35px; width: 100%; margin-top: 10px;">Upload File</label>
+                        <label for="file" class="btn btn-secondary py-3 px-4" style="height: 35px; width: 100%; margin-top: 10px; border-radius: 3px !important;">Upload File</label>
                         <input type="file" name="file" id="file" accept="images/*">
                         <input name="car_register" id="car_register" type="submit" value="GO" class="btn btn-secondary" style="width: 100% !important;">
                     </div>

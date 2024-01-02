@@ -44,10 +44,6 @@ if (isset($_POST["filter_button"])) {
           JOIN customer as c ON c.id = r.customer_id
           WHERE c.email='$cus_email';";
   }
-  elseif($option == '4')
-  {
-
-  }
 }
 else
 {
@@ -277,20 +273,6 @@ else
             </tr><!-- END TR-->
           <?php } ?>
           </tbody>
-          <tfoot>
-            <tr>
-              <td></td>
-              <td>
-                <p><label>#</label> cars <br>reserved</p>
-              </td>
-              <td>
-                <p><label>$x</label> daily <br>revenue</p>
-              </td>
-              <td>
-                <p><label>#</label> customers <br>reserving</p>
-              </td>
-            </tr>
-          </tfoot>
         </table>
       </div>
     </div>
