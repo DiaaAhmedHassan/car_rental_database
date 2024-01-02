@@ -206,26 +206,26 @@
                         class="btn btn-secondary">
                 </form>
             </div>
-            <form action="dashboard.php" method="POST" class="new_car_form">
-                <div class="up_group" style="grid-column: 1; grid-row: 1; margin:10px;">
-                    <div class="group">
-                        <h2 style="grid-column: 1; grid-row: 1;">Add New Car</h2>
-                        <label>Plate id</label><br>
-                        <input name="plate_id" id="plate_id" type="text" placeholder="car plate id">
-                    </div>
-                    <div class="group">
-                        <label>Car Model</label><br>
-                        <input name="model" id="model" type="text" placeholder="car model">
-                    </div>
-                    <div class="group">
-                        <label>Car Manufacturer</label><br>
-                        <input name="manufacturer" id="manufacturer" type="text" placeholder="car manufacurer">
-                    </div>
-                </div>
-                <div class="up_group" style="grid-column: 2; grid-row: 1;">
-                    <div class="group">
-                        <label>Car Color</label><br>
-                        <input name="color" id="color" type="text" placeholder="car color">
+            <div style="background-color: white; border-radius: 5px;">
+                <h2 style="grid-column: 1; grid-row: 1; margin: 10px 0px 5px 20px; max-height: 10%;">Add New Car</h2>
+                <form action="dashboard.php" method="POST" class="new_car_form" onsubmit="return valid_dash_board()">
+                    <div class="up_group" style="grid-column: 1; grid-row: 2; margin:10px;">
+                        <div class="group">
+                            <label>Plate id</label><br>
+                            <input name="plate_id" id="plate_id" type="text" placeholder="car plate id">
+                        </div>
+                        <div class="group">
+                            <label>Car Model</label><br>
+                            <input name="model" id="model" type="text" placeholder="car model">
+                        </div>
+                        <div class="group">
+                            <label>Car Manufacturer</label><br>
+                            <input name="manufacturer" id="manufacturer" type="text" placeholder="car manufacurer">
+                        </div>
+                        <div class="group">
+                            <label>Car Color</label><br>
+                            <input name="color" id="color" type="text" placeholder="car color">
+                        </div>
                     </div>
                     <div class="group">
                         <label>Price/Day</label><br>
@@ -382,6 +382,7 @@
                 text1.style.backgroundColor = "white";
                 if(text1 == "" ){
                     alert("please insert a start date");
+                    window.history.back();
                     return false;
                 }
             } else {
