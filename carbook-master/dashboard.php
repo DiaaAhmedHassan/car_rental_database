@@ -1,31 +1,31 @@
 <?php
-    include 'config.php';
-    if(isset($_POST['car_register'])){
+include 'config.php';
+if (isset($_POST['car_register'])) {
 
     $image = $_FILES['file']['name'];
 
     $image = $_POST["file"];
 
-        $car_id = $_POST["plate_id"];
-        
-        $model = $_POST["model"];
-        $manfacturer = $_POST["manufacturer"];
-        $color = $_POST["color"];
-        $price = $_POST["price"];
-        $mileage = $_POST["mileage"];
-        $officeId = $_POST["office_id"];
+    $car_id = $_POST["plate_id"];
 
-        $insertion = "INSERT INTO car (plate_id, model, manufacturer, color ,image, status, price, mileage, office_id) 
+    $model = $_POST["model"];
+    $manfacturer = $_POST["manufacturer"];
+    $color = $_POST["color"];
+    $price = $_POST["price"];
+    $mileage = $_POST["mileage"];
+    $officeId = $_POST["office_id"];
+
+    $insertion = "INSERT INTO car (plate_id, model, manufacturer, color ,image, status, price, mileage, office_id) 
         VALUES('$car_id','$model', '$manfacturer', '$color', 'images/$image', 'available', '$price', '$mileage', '$officeId')";
 
-        $result = mysqli_query($conn, $insertion);
-        if(!$result){
-            die("Error" . mysqli_error($conn));
-        }
-        
-        echo "<script>alert('car registeration succefull');</script>";
-        header("Location: car.php");
+    $result = mysqli_query($conn, $insertion);
+    if (!$result) {
+        die("Error" . mysqli_error($conn));
     }
+
+    echo "<script>alert('car registeration succefull');</script>";
+    header("Location: car.php");
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -35,8 +35,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-    <link href="https://fonts.googleapis.com/css?family=Poppins:200,300,400,500,600,700,800&display=swap"
-        rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Poppins:200,300,400,500,600,700,800&display=swap" rel="stylesheet">
 
     <link rel="stylesheet" href="css/open-iconic-bootstrap.min.css">
     <link rel="stylesheet" href="css/animate.css">
@@ -104,30 +103,35 @@
             background-color: lightgray;
         }
 
-        .new_car_form{
+        .new_car_form {
             padding: 10px;
             grid-column: 2 / 5;
             display: grid;
             grid-template-columns: repeat(3, 1fr);
             grid-template-rows: 1fr;
         }
-        .new_car_form .group{
+
+        .new_car_form .group {
             margin: 0px 0px 20px 0px;
         }
-        .file_group{
+
+        .file_group {
             grid-column: 3;
         }
-        .file_group input[type="file"]{
+
+        .file_group input[type="file"] {
             display: none;
         }
-        .file_group label{
+
+        .file_group label {
             height: 100px;
             width: 150px;
             border-radius: 6px;
             border: 1px dashed #999;
             text-transform: capitalize;
         }
-        .file_group label:hover{
+
+        .file_group label:hover {
             color: #de0611;
             border: 1px dashed #de0611;
         }
@@ -140,8 +144,7 @@
     <nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
         <div class="container">
             <a class="navbar-brand" href="index.html">Car<span>Book</span></a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav"
-                aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="oi oi-menu"></span> Menu
             </button>
 
@@ -160,15 +163,12 @@
     </nav>
     <!-- END nav -->
 
-    <section class="hero-wrap hero-wrap-2 js-fullheight" style="background-image: url('images/home-header.jpg');"
-        data-stellar-background-ratio="0.5">
+    <section class="hero-wrap hero-wrap-2 js-fullheight" style="background-image: url('images/home-header.jpg');" data-stellar-background-ratio="0.5">
         <div class="overlay"></div>
         <div class="container">
             <div class="row no-gutters slider-text js-fullheight align-items-end justify-content-start">
                 <div class="col-md-9 ftco-animate pb-5">
-                    <p class="breadcrumbs"><span class="mr-2"><a href="index.html">Home <i
-                                    class="ion-ios-arrow-forward"></i></a></span> <span>Dashboard <i
-                                class="ion-ios-arrow-forward"></i></span></p>
+                    <p class="breadcrumbs"><span class="mr-2"><a href="index.html">Home <i class="ion-ios-arrow-forward"></i></a></span> <span>Dashboard <i class="ion-ios-arrow-forward"></i></span></p>
                     <h1 class="mb-3 bread">Dashboard</h1>
                 </div>
             </div>
@@ -202,14 +202,13 @@
                         <input type="text" name="start_date" placeholder="Start Date" id="text5" disabled>
                         <input type="text" name="end_date" placeholder="End Date" id="text6" disabled>
                     </div>
-                    <input type="submit" name="filter_button" value="GO" style="width: 90% !important; margin: 0px auto;"
-                        class="btn btn-secondary">
+                    <input type="submit" name="filter_button" value="GO" style="width: 90% !important; margin: 0px auto;" class="btn btn-secondary">
                 </form>
             </div>
             <div style="background-color: white; border-radius: 5px;">
                 <h2 style="grid-column: 1; grid-row: 1; margin: 10px 0px 5px 20px; max-height: 10%;">Add New Car</h2>
-                <form action="dashboard.php" method="POST" class="new_car_form" onsubmit="return valid_dash_board()">
-                    <div class="up_group" style="grid-column: 1; grid-row: 2; margin:10px;">
+                <form action="dashboard.php" method="POST" class="new_car_form">
+                    <div class="up_group" style="grid-column: 1; margin:10px;">
                         <div class="group">
                             <label>Plate id</label><br>
                             <input name="plate_id" id="plate_id" type="text" placeholder="car plate id">
@@ -227,30 +226,29 @@
                             <input name="color" id="color" type="text" placeholder="car color">
                         </div>
                     </div>
-                    <div class="group">
-                        <label>Price/Day</label><br>
-                        <input name="price" id="price" type="text" placeholder="car price/day">
+                    <div class="up_group" style="grid-column: 2; margin:10px;">
+                        <div class="group">
+                            <label>Price/Day</label><br>
+                            <input name="price" id="price" type="text" placeholder="car price/day">
+                        </div>
+                        <div class="group">
+                            <label>Mileage</label><br>
+                            <input name="mileage" id="mileage" type="text" placeholder="car mileage">
+                        </div>
+                        <div class="group">
+                            <label>Office id</label><br>
+                            <input name="office_id" id="office_id" type="text" placeholder="car office id">
+                        </div>
                     </div>
-                    <div class="group">
-                        <label>Mileage</label><br>
-                        <input name="mileage" id="mileage" type="text" placeholder="car mileage">
+                    <div class="file_group" style="grid-column: 3;">
+                        <input type="hidden">
+                        <img src="images/upload.jpg" id="image" style="width: 300px; height: 175px; margin: 10px;" />
+                        <label for="file" class="btn btn-secondary py-3 px-4" style="height: 35px; width: 100%; margin-top: 10px;">Upload File</label>
+                        <input type="file" name="file" id="file" accept="images/*">
+                        <input name="car_register" id="car_register" type="submit" value="GO" class="btn btn-secondary" style="width: 100% !important;">
                     </div>
-                    <div class="group">
-                        <label>Office id</label><br>
-                        <input name="office_id" id="office_id" type="text" placeholder="car office id">
-                    </div>
-                    <input name="car_register" id="car_register" type="submit" value="GO" class="btn btn-secondary" style="min-width: 70%; align-self: center; display: block !important; margin: auto;">
-                </div>
-                <div class="file_group" style="grid-column: 3; grid-row: 1;">
-                    <input type="hidden">
-                    <img src="images/upload.jpg" id="image" style="width: 300px; height: 175px; margin: 10px;"/>
-                    <label for="file" class="btn btn-secondary py-3 px-4" style="height: 45px; width: 300px; margin-top: 10px; margin-left: 10px;">Upload File</label>
-                    <input type="file" name="file" id="file" accept="images/*">
-                    
-                    
-                </div>
-            </form>
-        </div>
+                </form>
+            </div>
     </section>
 
 
@@ -302,8 +300,7 @@
                                         View, San Francisco, California, USA</span></li>
                                 <li><a href="#"><span class="icon icon-phone"></span><span class="text">+2 392 3929
                                             210</span></a></li>
-                                <li><a href="#"><span class="icon icon-envelope"></span><span
-                                            class="text">info@yourdomain.com</span></a></li>
+                                <li><a href="#"><span class="icon icon-envelope"></span><span class="text">info@yourdomain.com</span></a></li>
                             </ul>
                         </div>
                     </div>
@@ -314,9 +311,10 @@
 
                     <p><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
                         Copyright &copy;
-                        <script>document.write(new Date().getFullYear());</script> All rights reserved | This template
-                        is made with <i class="icon-heart color-danger" aria-hidden="true"></i> by <a
-                            href="https://colorlib.com" target="_blank">Colorlib</a>
+                        <script>
+                            document.write(new Date().getFullYear());
+                        </script> All rights reserved | This template
+                        is made with <i class="icon-heart color-danger" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>
                         <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
                     </p>
                 </div>
@@ -329,8 +327,7 @@
     <!-- loader -->
     <div id="ftco-loader" class="show fullscreen"><svg class="circular" width="48px" height="48px">
             <circle class="path-bg" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke="#eeeeee" />
-            <circle class="path" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke-miterlimit="10"
-                stroke="#F96D00" />
+            <circle class="path" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke-miterlimit="10" stroke="#F96D00" />
         </svg></div>
 
 
@@ -348,8 +345,7 @@
     <script src="js/bootstrap-datepicker.js"></script>
     <script src="js/jquery.timepicker.min.js"></script>
     <script src="js/scrollax.min.js"></script>
-    <script
-        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor=false"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor=false"></script>
     <script src="js/google-map.js"></script>
     <script src="js/main.js"></script>
 
@@ -358,7 +354,7 @@
         let inputFile = document.getElementById("file");
         let urlStore = document.getElementById("car-image");
 
-        inputFile.onchange = function(){
+        inputFile.onchange = function() {
             img.src = URL.createObjectURL(inputFile.files[0]);
             urlStore.value = img.src;
         }
@@ -380,7 +376,7 @@
             text1.disabled = option1.checked ? false : true;
             if (text1.disabled == false) {
                 text1.style.backgroundColor = "white";
-                if(text1 == "" ){
+                if (text1 == "") {
                     alert("please insert a start date");
                     window.history.back();
                     return false;
@@ -392,7 +388,7 @@
             text2.disabled = option1.checked ? false : true;
             if (text2.disabled == false) {
                 text2.style.backgroundColor = "white";
-                if(text2 == ""){
+                if (text2 == "") {
                     alert("please insert a end date");
                     return false;
                 }
@@ -404,7 +400,7 @@
             text3.disabled = option2.checked ? false : true;
             if (text3.disabled == false) {
                 text3.style.backgroundColor = "white";
-                if(text3 == ""){
+                if (text3 == "") {
                     alert("please insert a correct date");
                     return false;
                 }
@@ -415,7 +411,7 @@
             text4.disabled = option3.checked ? false : true;
             if (text4.disabled == false) {
                 text4.style.backgroundColor = "white";
-                if(text4 == "" || !isInteger(text4)){
+                if (text4 == "" || !isInteger(text4)) {
                     alert("please insert a id");
                     return false;
                 }
@@ -426,9 +422,10 @@
             text5.disabled = option4.checked ? false : true;
             if (text5.disabled == false) {
                 text5.style.backgroundColor = "white";
-                if(text5 == ""){
+                if (text5 == "") {
                     alert("please insert a start date");
-                    return false;}
+                    return false;
+                }
             } else {
                 text5.style.backgroundColor = "#D3D3D3";
             }
@@ -437,13 +434,13 @@
 
             if (text6.disabled == false) {
                 text6.style.backgroundColor = "white";
-                if(text6 == ""){
+                if (text6 == "") {
                     alert("please insert a end date");
                     return false;
-            } else {
-                text6.style.backgroundColor = "#D3D3D3";
+                } else {
+                    text6.style.backgroundColor = "#D3D3D3";
+                }
             }
-        }
         }
     </script>
     <script src="dash_board_validation.js"></script>
