@@ -160,13 +160,7 @@ function numberOfDays($sDate, $eDate){
 
 			<div class="collapse navbar-collapse" id="ftco-nav">
 				<ul class="navbar-nav ml-auto">
-					<li class="nav-item"><a href="index.html" class="nav-link">Home</a></li>
-					<li class="nav-item"><a href="about.html" class="nav-link">About</a></li>
-					<li class="nav-item"><a href="services.html" class="nav-link">Services</a></li>
-					<li class="nav-item"><a href="pricing.html" class="nav-link">Pricing</a></li>
-					<li class="nav-item active"><a href="car.html" class="nav-link">Cars</a></li>
-					<li class="nav-item"><a href="blog.html" class="nav-link">Blog</a></li>
-					<li class="nav-item"><a href="contact.html" class="nav-link">Contact</a></li>
+				<li class="nav-item"><a href="logout.php" class="nav-link">Logout</a></li>
 				</ul>
 			</div>
 		</div>
@@ -490,61 +484,6 @@ function numberOfDays($sDate, $eDate){
 									</div>
 								</div>
 							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</section>
-
-	<section class="ftco-section ftco-no-pt">
-		<div class="container">
-			<div class="row justify-content-center">
-				<div class="col-md-12 heading-section text-center ftco-animate mb-5">
-					<span class="subheading">Choose Car</span>
-					<h2 class="mb-2">Related Cars</h2>
-				</div>
-			</div>
-			<div class="row">
-				<div class="col-md-4">
-					<div class="car-wrap rounded ftco-animate">
-						<div class="img rounded d-flex align-items-end" style="background-image: url(images/car-1.jpg);">
-						</div>
-						<div class="text">
-							<h2 class="mb-0"><a href="car-single.html">Mercedes Grand Sedan</a></h2>
-							<div class="d-flex mb-3">
-								<span class="cat">Cheverolet</span>
-								<p class="price ml-auto">$500 <span>/day</span></p>
-							</div>
-							<p class="d-flex mb-0 d-block"><a href="#" class="btn btn-primary py-2 mr-1">Book now</a> <a href="car-single.html" class="btn btn-secondary py-2 ml-1">Details</a></p>
-						</div>
-					</div>
-				</div>
-				<div class="col-md-4">
-					<div class="car-wrap rounded ftco-animate">
-						<div class="img rounded d-flex align-items-end" style="background-image: url(images/car-2.jpg);">
-						</div>
-						<div class="text">
-							<h2 class="mb-0"><a href="car-single.html">Range Rover</a></h2>
-							<div class="d-flex mb-3">
-								<span class="cat">Subaru</span>
-								<p class="price ml-auto">$500 <span>/day</span></p>
-							</div>
-							<p class="d-flex mb-0 d-block"><a href="#" class="btn btn-primary py-2 mr-1">Book now</a> <a href="car-single.html" class="btn btn-secondary py-2 ml-1">Details</a></p>
-						</div>
-					</div>
-				</div>
-				<div class="col-md-4">
-					<div class="car-wrap rounded ftco-animate">
-						<div class="img rounded d-flex align-items-end" style="background-image: url(images/car-3.jpg);">
-						</div>
-						<div class="text">
-							<h2 class="mb-0"><a href="car-single.html">Mercedes Grand Sedan</a></h2>
-							<div class="d-flex mb-3">
-								<span class="cat">Cheverolet</span>
-								<p class="price ml-auto">$500 <span>/day</span></p>
-							</div>
-							<p class="d-flex mb-0 d-block"><a href="#" class="btn btn-primary py-2 mr-1">Book now</a> <a href="car-single.html" class="btn btn-secondary py-2 ml-1">Details</a></p>
 						</div>
 					</div>
 				</div>
