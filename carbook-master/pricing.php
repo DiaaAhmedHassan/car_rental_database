@@ -1,4 +1,43 @@
 <!DOCTYPE html>
+<?php
+include "config.php";
+// var_dump($_POST);
+if (isset($_POST["filter_button"])) {
+  
+  $option = $_POST["group"];
+  if($option == '1')
+  {
+    $start_date = $_POST['start_date'];
+    $end_date = $_POST['end_date'];
+
+    $q = "SELECT * from reservation as r
+          JOIN car ON r.plate_id = car.plate_id
+          JOIN customer ON customer.id = r.customer_id
+          WHERE r.start_date>='$start_date' AND r.end_date< '$end_date';";
+  }
+  elseif($option == '2')
+  {
+      
+  }
+  elseif($option == '3')
+  {
+    $cus_email = $_POST['email'];
+    $q = "SELECT * from reservation as r
+          JOIN car ON r.plate_id =car.plate_id
+          JOIN customer as c ON c.id = r.customer_id
+          WHERE c.email='$cus_email';";
+  }
+  elseif($option == '4')
+  {
+
+  }
+}
+else
+{
+  header("Location: dashboard.php");
+}
+?>
+
 <html lang="en">
 
 <head>
@@ -97,6 +136,9 @@
       text-align: center;
       padding: 30px 20px 30px 20px !important;
     }
+    .product-name{
+      text-align: left !important;
+    }
 
     td p,
     label {
@@ -186,60 +228,48 @@
             </tr>
           </thead>
           <tbody>
+            <?php
+              $result = mysqli_query($conn, $q);
+              while($row = mysqli_fetch_assoc($result)){
+                $car_img = $row['image'];
+                $car_id = $row['plate_id'];
+                $car_model = $row['model'];
+                $car_status = $row['status'];
+                $car_price = $row['price'];
+                $res_start = $row['start_date'];
+                $res_end = $row['end_date'];
+                $res_cost = $row['total_price'];
+                $cus_name = $row['name'];
+                $cus_phone = $row['phone_number'];
+            ?>
             <tr class="">
               <td class="car-image">
-                <div class="img" style="background-image:url(images/car-1.jpg);"></div>
+                <div class="img" style="background-image:url(<?php echo "$car_img";?>);"></div>
               </td>
               <td class="product-name">
-                <h3>Cheverolet SUV</h3>
+                <h3><?php echo "$car_model"; ?></h3>
                 <p class="mb-0 rated">
-                  <span style="color: black;">$10.99/per day</span>
-
+                  <span style="color: black;">$<?php echo "$car_price";?>/per day</span>
+                  <span style="color: black;">currently <?php echo "$car_status";?></span>
                 </p>
               </td>
 
               <td class="product-name">
                 <div class="price-rate">
-                  <span class="subheading">from: 2024-01-01</span> <br>
-                  <span class="subheading">to: 2024-01-10</span> <br>
-                  <span class="subheading">paid $500</span>
+                  <span class="subheading">from: <?php echo "$res_start";?></span> <br>
+                  <span class="subheading">to: <?php echo "$res_end";?></span> <br>
+                  <span class="subheading">paid $<?php echo "$res_cost";?></span>
                 </div>
               </td>
 
               <td class="product-name">
                 <div class="price-rate">
-                  <span class="subheading">John Smith</span> <br>
-                  <span class="subheading">124132413</span>
+                  <span class="subheading">Name: <?php echo "$cus_name";?></span> <br>
+                  <span class="subheading">Phone: <?php echo "$cus_phone";?></span>
                 </div>
               </td>
             </tr><!-- END TR-->
-            <tr class="">
-              <td class="car-image">
-                <div class="img" style="background-image:url(images/car-1.jpg);"></div>
-              </td>
-              <td class="product-name">
-                <h3>Cheverolet SUV</h3>
-                <p class="mb-0 rated">
-                  <span style="color: black;">$10.99/per day</span>
-
-                </p>
-              </td>
-
-              <td class="product-name">
-                <div class="price-rate">
-                  <span class="subheading">from: 2024-01-01</span> <br>
-                  <span class="subheading">to: 2024-01-10</span> <br>
-                  <span class="subheading">paid $500</span>
-                </div>
-              </td>
-
-              <td class="product-name">
-                <div class="price-rate">
-                  <span class="subheading">John Smith</span> <br>
-                  <span class="subheading">124132413</span>
-                </div>
-              </td>
-            </tr><!-- END TR-->
+          <?php } ?>
           </tbody>
           <tfoot>
             <tr>

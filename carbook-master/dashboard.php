@@ -1,32 +1,31 @@
 <?php
-include 'config.php';
-if(isset($_POST['car_register'])){
+    include 'config.php';
+    if(isset($_POST['car_register'])){
 
-   $image = $_FILES['file']['name'];
+    $image = $_FILES['file']['name'];
 
-   $image = $_POST["file"];
+    $image = $_POST["file"];
 
-    $car_id = $_POST["plate_id"];
-    
-    $model = $_POST["model"];
-    $manfacturer = $_POST["manufacturer"];
-    $color = $_POST["color"];
-    $price = $_POST["price"];
-    $mileage = $_POST["mileage"];
-    $officeId = $_POST["office_id"];
+        $car_id = $_POST["plate_id"];
+        
+        $model = $_POST["model"];
+        $manfacturer = $_POST["manufacturer"];
+        $color = $_POST["color"];
+        $price = $_POST["price"];
+        $mileage = $_POST["mileage"];
+        $officeId = $_POST["office_id"];
 
-    $insertion = "INSERT INTO car (plate_id, model, manufacturer, color ,image, status, price, mileage, office_id) 
-    VALUES('$car_id','$model', '$manfacturer', '$color', 'images/$image', 'available', '$price', '$mileage', '$officeId')";
+        $insertion = "INSERT INTO car (plate_id, model, manufacturer, color ,image, status, price, mileage, office_id) 
+        VALUES('$car_id','$model', '$manfacturer', '$color', 'images/$image', 'available', '$price', '$mileage', '$officeId')";
 
-    $result = mysqli_query($conn, $insertion);
-    if(!$result){
-        die("Error" . mysqli_error($conn));
+        $result = mysqli_query($conn, $insertion);
+        if(!$result){
+            die("Error" . mysqli_error($conn));
+        }
+        
+        echo "<script>alert('car registeration succefull');</script>";
+        header("Location: car.php");
     }
-    
-    echo "<script>alert('car registeration succefull');</script>";
-    header("Location: car.php");
-}
-
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -106,9 +105,8 @@ if(isset($_POST['car_register'])){
         }
 
         .new_car_form{
-            padding: 20px;
+            padding: 10px;
             grid-column: 2 / 5;
-            background-color: rgb(254, 227, 213);
             display: grid;
             grid-template-columns: repeat(3, 1fr);
             grid-template-rows: 1fr;
@@ -180,78 +178,80 @@ if(isset($_POST['car_register'])){
     <section class="ftco-section ftco-cart flex_section">
         <div class="middle">
             <div class="sidebar">
-                <form action="dashboard.php">
+                <form action="pricing.php" method="POST">
                     <h2 style="text-align: left !important;">Filters</h2>
                     <div class="sidebar_option">
-                        <input type="radio" id="option1" name="group1" value="option1" onclick="choose()">
+                        <input type="radio" id="option1" name="group" value="1" onclick="choose()">
                         <label for="option1">Show Reservation</label><br>
                         <input type="text" name="start_date" placeholder="Start Date" id="text1" disabled>
                         <input type="text" name="end_date" placeholder="End Date" id="text2" disabled>
                     </div>
                     <div class="sidebar_option">
-                        <input type="radio" id="option2" name="group1" value="option2" onclick="choose()">
+                        <input type="radio" id="option2" name="group" value="2" onclick="choose()">
                         <label for="option1">Show Car Status</label><br>
                         <input type="text" name="start_date" placeholder="Choose Date" id="text3" disabled>
                     </div>
                     <div class="sidebar_option">
-                        <input type="radio" id="option3" name="group1" value="option3" onclick="choose()">
+                        <input type="radio" id="option3" name="group" value="3" onclick="choose()">
                         <label for="option1">Show Customer</label><br>
-                        <input type="text" name="start_date" placeholder="Customer id" id="text4" disabled>
+                        <input type="text" name="email" placeholder="Customer email" id="text4" disabled>
                     </div>
                     <div class="sidebar_option">
-                        <input type="radio" id="option4" name="group1" value="option4" onclick="choose()">
+                        <input type="radio" id="option4" name="group" value="4" onclick="choose()">
                         <label for="option4">Show Customer</label><br>
                         <input type="text" name="start_date" placeholder="Start Date" id="text5" disabled>
                         <input type="text" name="end_date" placeholder="End Date" id="text6" disabled>
                     </div>
-                    <input type="submit" value="GO" style="width: 90% !important; margin: 0px auto;"
+                    <input type="submit" name="filter_button" value="GO" style="width: 90% !important; margin: 0px auto;"
                         class="btn btn-secondary">
                 </form>
             </div>
-            <form action="dashboard.php" method="POST" class="new_car_form">
-                <h2 style="grid-column: 1; grid-row: 1;">Add New Car</h2>
-                <div class="up_group" style="grid-column: 1; grid-row: 1; margin:10px;">
-                    <div class="group">
-                        <label>Plate id</label><br>
-                        <input name="plate_id" id="plate_id" type="text" placeholder="car plate id">
+            <div style="background-color: white; border-radius: 5px;">
+                <h2 style="grid-column: 1; grid-row: 1; margin: 10px 0px 5px 20px; max-height: 10%;">Add New Car</h2>
+                <form action="dashboard.php" method="POST" class="new_car_form">
+                    <div class="up_group" style="grid-column: 1; grid-row: 2; margin:10px;">
+                        <div class="group">
+                            <label>Plate id</label><br>
+                            <input name="plate_id" id="plate_id" type="text" placeholder="car plate id">
+                        </div>
+                        <div class="group">
+                            <label>Car Model</label><br>
+                            <input name="model" id="model" type="text" placeholder="car model">
+                        </div>
+                        <div class="group">
+                            <label>Car Manufacturer</label><br>
+                            <input name="manufacturer" id="manufacturer" type="text" placeholder="car manufacurer">
+                        </div>
+                        <div class="group">
+                            <label>Car Color</label><br>
+                            <input name="color" id="color" type="text" placeholder="car color">
+                        </div>
                     </div>
-                    <div class="group">
-                        <label>Car Model</label><br>
-                        <input name="model" id="model" type="text" placeholder="car model">
+                    <div class="up_group" style="grid-column: 2; grid-row: 2;">
+                        <div class="group">
+                            <label>Price/Day</label><br>
+                            <input name="price" id="price" type="text" placeholder="car price/day">
+                        </div>
+                        <div class="group">
+                            <label>Mileage</label><br>
+                            <input name="mileage" id="mileage" type="text" placeholder="car mileage">
+                        </div>
+                        <div class="group">
+                            <label>Office id</label><br>
+                            <input name="office_id" id="office_id" type="text" placeholder="car office id">
+                        </div>
+                        <input name="car_register" id="car_register" type="submit" value="GO" class="btn btn-secondary" style="min-width: 70%; align-self: center; display: block !important; margin: auto;">
                     </div>
-                    <div class="group">
-                        <label>Car Manufacturer</label><br>
-                        <input name="manufacturer" id="manufacturer" type="text" placeholder="car manufacurer">
+                    <div class="file_group" style="grid-column: 3; grid-row: 2;">
+                        <input type="hidden">
+                        <img src="images/upload.jpg" id="image" style="width: 300px; height: 175px; margin: 10px;"/>
+                        <label for="file" class="btn btn-secondary py-3 px-4" style="height: 45px; width: 300px; margin-top: 10px; margin-left: 10px;">Upload File</label>
+                        <input type="file" name="file" id="file" accept="images/*">
+                        
+                        
                     </div>
-                    <div class="group">
-                        <label>Car Color</label><br>
-                        <input name="color" id="color" type="text" placeholder="car color">
-                    </div>
-                </div>
-                <div class="up_group" style="grid-column: 2; grid-row: 1;">
-                    <div class="group">
-                        <label>Price/Day</label><br>
-                        <input name="price" id="price" type="text" placeholder="car price/day">
-                    </div>
-                    <div class="group">
-                        <label>Mileage</label><br>
-                        <input name="mileage" id="mileage" type="text" placeholder="car mileage">
-                    </div>
-                    <div class="group">
-                        <label>Office id</label><br>
-                        <input name="office_id" id="office_id" type="text" placeholder="car office id">
-                    </div>
-                    <input name="car_register" id="car_register" type="submit" value="GO" class="btn btn-secondary" style="min-width: 70%; align-self: center; display: block !important; margin: auto;">
-                </div>
-                <div class="file_group" style="grid-column: 3; grid-row: 1;">
-                    <input type="hidden">
-                    <img src="images/upload.jpg" id="image" style="width: 300px; height: 175px; margin: 10px;"/>
-                    <label for="file" class="btn btn-secondary py-3 px-4" style="height: 45px; width: 300px; margin-top: 10px; margin-left: 10px;">Upload File</label>
-                    <input type="file" name="file" id="file" accept="images/*">
-                    
-                    
-                </div>
-            </form>
+                </form>
+            </div>
         </div>
     </section>
 
