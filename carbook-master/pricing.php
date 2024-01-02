@@ -14,10 +14,27 @@ if (isset($_POST["filter_button"])) {
           JOIN car ON r.plate_id = car.plate_id
           JOIN customer ON customer.id = r.customer_id
           WHERE r.start_date>='$start_date' AND r.end_date< '$end_date';";
+
+    $q2 = "SELECT 
+    start_date,
+    SUM(total_price) AS total_price_for_day
+    FROM 
+        reservation
+    WHERE
+        reservation.start_date BETWEEN '$start_date'  and '$end_date'
+    GROUP BY 
+        start_date;";
   }
   elseif($option == '2')
   {
-      
+      $date = $_POST['date'];
+      $q = "SELECT car.plate_id, car.model, car.image, car.price,
+      IF(car.plate_id IN (SELECT r.plate_id
+                          FROM reservation as r
+                          WHERE r.start_date <= 'date'
+                          AND r.end_date > 'date'),
+                          'rented', 'available') AS `status`
+      FROM car;";
   }
   elseif($option == '3')
   {
@@ -86,43 +103,24 @@ else
 
     .sidebar {
       display: flex !important;
+      flex-direction: column;
       padding: 0px 20px;
       color: black;
-      display: block;
-      /* flex: 0.3 0 15%; */
-      /* border-right: 0.00001px solid lightgray; */
-      /* border: 4px solid red; */
+      border-right: 2px solid rgba(0, 0, 0, 0.25);
     }
-
-    .sidebar form {
-      display: flex;
-      flex-direction: column;
-    }
-
-    .sidebar_option {
-      margin: 0px 0px 30px 0px;
-      border-bottom: 1px solid lightgray;
-    }
-
-    .sidebar_option input[type="radio"] {
-      accent-color: #1089ff;
-    }
-
-    .sidebar_option input[type="text"] {
-      margin: 10px 10px 10px 30px;
-      padding: 5px;
-      border: 0px solid black;
+    .r4_card{
+      padding: 20px;
+      margin: 20px;
+      font-size: 16px;
+      background-color: white;
       border-radius: 5px;
-      background-color: lightgray;
+      display: block; 
     }
 
     .cars_container {
       display: flex !important;
       height: 100%;
       grid-column: span 3;
-      /* flex: 1.5; */
-      /* margin: auto; */
-      /* border: 4px solid black; */
     }
 
     .table {
@@ -195,28 +193,27 @@ else
 
   <section class="ftco-section ftco-cart flex_section">
     <div class="middle">
+      <?php 
+        if($option == '1'){
+      ?>
       <div class="sidebar">
-        <form>
-          <h2 style="text-align: left !important;">Filters</h2>
-          <div class="sidebar_option">
-            <input type="radio" id="option1" name="group1" value="option1" onclick="choose()">
-            <label for="option1">Show Reservation</label><br>
-            <input type="text" name="start_date" placeholder="Start Date" id="text1" disabled>
-            <input type="text" name="end_date" placeholder="End Date" id="text2" disabled>
-          </div>
-          <div class="sidebar_option">
-            <input type="radio" id="option2" name="group1" value="option2" onclick="choose()">
-            <label for="option1">Show Car Status</label><br>
-            <input type="text" name="start_date" placeholder="Choose Date" id="text3" disabled>
-          </div>
-          <div class="sidebar_option">
-            <input type="radio" id="option3" name="group1" value="option3" onclick="choose()">
-            <label for="option1">Show Customer</label><br>
-            <input type="text" name="start_date" placeholder="Customer id" id="text4" disabled>
-          </div>
-          <input type="submit" value="GO" style="width: 90% !important; margin: 0px auto;" class="btn btn-secondary">
-        </form>
+      <h2>Daily Payments</h2>
+          <?php
+          $result2 = mysqli_query($conn, $q2);
+          while($row2 = mysqli_fetch_assoc($result2))
+          {
+            $date = $row2['start_date'];
+            $payment = $row2['total_price_for_day']
+            ?>
+            <div class="r4_card">
+              <p>date: <?php echo"$date"; ?></p>
+              <p>payments: $<?php echo"$payment"; ?></p>
+            </div>
+
+          <?php }?>
       </div>
+      <?php } ?>
+      
       <div class="cars_container">
         <table class="table">
           <thead class="thead-primary">
@@ -231,16 +228,33 @@ else
             <?php
               $result = mysqli_query($conn, $q);
               while($row = mysqli_fetch_assoc($result)){
-                $car_img = $row['image'];
-                $car_id = $row['plate_id'];
-                $car_model = $row['model'];
-                $car_status = $row['status'];
-                $car_price = $row['price'];
-                $res_start = $row['start_date'];
-                $res_end = $row['end_date'];
-                $res_cost = $row['total_price'];
-                $cus_name = $row['name'];
-                $cus_phone = $row['phone_number'];
+                if($option == '1' || $option == '3')
+                {
+                  $car_img = $row['image'];
+                  $car_id = $row['plate_id'];
+                  $car_model = $row['model'];
+                  $car_status = $row['status'];
+                  $car_price = $row['price'];
+                  $res_start = $row['start_date'];
+                  $res_end = $row['end_date'];
+                  $res_cost = $row['total_price'];
+                  $cus_name = $row['name'];
+                  $cus_phone = $row['phone_number'];
+                }
+                elseif($option == '2')
+                {
+                  $car_img = $row['image'];
+                  $car_id = $row['plate_id'];
+                  $car_model = $row['model'];
+                  $car_status = $row['status'];
+                  $car_price = $row['price'];
+                  
+                  $res_start = "-";
+                  $res_end = "-";
+                  $res_cost = "-";
+                  $cus_name = "-";
+                  $cus_phone = "-";
+                }
             ?>
             <tr class="">
               <td class="car-image">

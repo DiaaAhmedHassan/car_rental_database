@@ -189,7 +189,7 @@
                     <div class="sidebar_option">
                         <input type="radio" id="option2" name="group" value="2" onclick="choose()">
                         <label for="option1">Show Car Status</label><br>
-                        <input type="text" name="start_date" placeholder="Choose Date" id="text3" disabled>
+                        <input type="text" name="date" placeholder="Choose Date" id="text3" disabled>
                     </div>
                     <div class="sidebar_option">
                         <input type="radio" id="option3" name="group" value="3" onclick="choose()">
@@ -206,52 +206,50 @@
                         class="btn btn-secondary">
                 </form>
             </div>
-            <div style="background-color: white; border-radius: 5px;">
-                <h2 style="grid-column: 1; grid-row: 1; margin: 10px 0px 5px 20px; max-height: 10%;">Add New Car</h2>
-                <form action="dashboard.php" method="POST" class="new_car_form">
-                    <div class="up_group" style="grid-column: 1; grid-row: 2; margin:10px;">
-                        <div class="group">
-                            <label>Plate id</label><br>
-                            <input name="plate_id" id="plate_id" type="text" placeholder="car plate id">
-                        </div>
-                        <div class="group">
-                            <label>Car Model</label><br>
-                            <input name="model" id="model" type="text" placeholder="car model">
-                        </div>
-                        <div class="group">
-                            <label>Car Manufacturer</label><br>
-                            <input name="manufacturer" id="manufacturer" type="text" placeholder="car manufacurer">
-                        </div>
-                        <div class="group">
-                            <label>Car Color</label><br>
-                            <input name="color" id="color" type="text" placeholder="car color">
-                        </div>
+            <form action="dashboard.php" method="POST" class="new_car_form">
+                <div class="up_group" style="grid-column: 1; grid-row: 1; margin:10px;">
+                    <div class="group">
+                        <h2 style="grid-column: 1; grid-row: 1;">Add New Car</h2>
+                        <label>Plate id</label><br>
+                        <input name="plate_id" id="plate_id" type="text" placeholder="car plate id">
                     </div>
-                    <div class="up_group" style="grid-column: 2; grid-row: 2;">
-                        <div class="group">
-                            <label>Price/Day</label><br>
-                            <input name="price" id="price" type="text" placeholder="car price/day">
-                        </div>
-                        <div class="group">
-                            <label>Mileage</label><br>
-                            <input name="mileage" id="mileage" type="text" placeholder="car mileage">
-                        </div>
-                        <div class="group">
-                            <label>Office id</label><br>
-                            <input name="office_id" id="office_id" type="text" placeholder="car office id">
-                        </div>
-                        <input name="car_register" id="car_register" type="submit" value="GO" class="btn btn-secondary" style="min-width: 70%; align-self: center; display: block !important; margin: auto;">
+                    <div class="group">
+                        <label>Car Model</label><br>
+                        <input name="model" id="model" type="text" placeholder="car model">
                     </div>
-                    <div class="file_group" style="grid-column: 3; grid-row: 2;">
-                        <input type="hidden">
-                        <img src="images/upload.jpg" id="image" style="width: 300px; height: 175px; margin: 10px;"/>
-                        <label for="file" class="btn btn-secondary py-3 px-4" style="height: 45px; width: 300px; margin-top: 10px; margin-left: 10px;">Upload File</label>
-                        <input type="file" name="file" id="file" accept="images/*">
-                        
-                        
+                    <div class="group">
+                        <label>Car Manufacturer</label><br>
+                        <input name="manufacturer" id="manufacturer" type="text" placeholder="car manufacurer">
                     </div>
-                </form>
-            </div>
+                </div>
+                <div class="up_group" style="grid-column: 2; grid-row: 1;">
+                    <div class="group">
+                        <label>Car Color</label><br>
+                        <input name="color" id="color" type="text" placeholder="car color">
+                    </div>
+                    <div class="group">
+                        <label>Price/Day</label><br>
+                        <input name="price" id="price" type="text" placeholder="car price/day">
+                    </div>
+                    <div class="group">
+                        <label>Mileage</label><br>
+                        <input name="mileage" id="mileage" type="text" placeholder="car mileage">
+                    </div>
+                    <div class="group">
+                        <label>Office id</label><br>
+                        <input name="office_id" id="office_id" type="text" placeholder="car office id">
+                    </div>
+                    <input name="car_register" id="car_register" type="submit" value="GO" class="btn btn-secondary" style="min-width: 70%; align-self: center; display: block !important; margin: auto;">
+                </div>
+                <div class="file_group" style="grid-column: 3; grid-row: 1;">
+                    <input type="hidden">
+                    <img src="images/upload.jpg" id="image" style="width: 300px; height: 175px; margin: 10px;"/>
+                    <label for="file" class="btn btn-secondary py-3 px-4" style="height: 45px; width: 300px; margin-top: 10px; margin-left: 10px;">Upload File</label>
+                    <input type="file" name="file" id="file" accept="images/*">
+                    
+                    
+                </div>
+            </form>
         </div>
     </section>
 
