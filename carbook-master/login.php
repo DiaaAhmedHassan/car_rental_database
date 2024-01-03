@@ -65,7 +65,7 @@ if(isset($_POST['login']))
   </head>
 <body>
   <div class="container">
-    <form action="car.php" method="post" onsubmit ="valid_login()" class="request-form ftco-animate bg-primary fadeInUp ftco-animated">
+    <form action="#" method="post" onsubmit ="valid_login()" class="request-form ftco-animate bg-primary fadeInUp ftco-animated">
       <h2 style="color: white">Welcome to AutoRent</h2>
       <div class="form-group">
         <label style="color: white" for="" class="label">Email</label>

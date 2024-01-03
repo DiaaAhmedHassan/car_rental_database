@@ -1,3 +1,33 @@
+<?php
+include 'config.php';
+if(isset($_POST['car_register'])){
+
+   $image = $_FILES['file']['name'];
+
+   $image = $_POST["file"];
+
+    $car_id = $_POST["plate_id"];
+    
+    $model = $_POST["model"];
+    $manfacturer = $_POST["manufacturer"];
+    $color = $_POST["color"];
+    $price = $_POST["price"];
+    $mileage = $_POST["mileage"];
+    $officeId = $_POST["office_id"];
+
+    $insertion = "INSERT INTO car (plate_id, model, manufacturer, color ,image, status, price, mileage, office_id) 
+    VALUES('$car_id','$model', '$manfacturer', '$color', 'images/$image', 'available', '$price', '$mileage', '$officeId')";
+
+    $result = mysqli_query($conn, $insertion);
+    if(!$result){
+        die("Error" . mysqli_error($conn));
+    }
+    
+    echo "<script>alert('car registeration succefull');</script>";
+    header("Location: car.php");
+}
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -149,7 +179,7 @@
     <section class="ftco-section ftco-cart flex_section">
         <div class="middle">
             <div class="sidebar">
-                <form>
+                <form action="dashboard.php">
                     <h2 style="text-align: left !important;">Filters</h2>
                     <div class="sidebar_option">
                         <input type="radio" id="option1" name="group1" value="option1" onclick="choose()">
@@ -167,48 +197,57 @@
                         <label for="option1">Show Customer</label><br>
                         <input type="text" name="start_date" placeholder="Customer id" id="text4" disabled>
                     </div>
+                    <div class="sidebar_option">
+                        <input type="radio" id="option4" name="group1" value="option4" onclick="choose()">
+                        <label for="option4">Show Customer</label><br>
+                        <input type="text" name="start_date" placeholder="Start Date" id="text5" disabled>
+                        <input type="text" name="end_date" placeholder="End Date" id="text6" disabled>
+                    </div>
                     <input type="submit" value="GO" style="width: 90% !important; margin: 0px auto;"
                         class="btn btn-secondary">
                 </form>
             </div>
-            <form action=""  class="new_car_form">
+            <form action="dashboard.php" method="POST" class="new_car_form">
                 <div class="up_group">
                     <div class="group">
-                        <label style="">Plate id</label><br>
-                        <input type="text">
+                        <label>Plate id</label><br>
+                        <input name="plate_id" id="plate_id" type="text" placeholder="car plate id">
                     </div>
                     <div class="group">
                         <label>Car Model</label><br>
-                        <input type="text">
+                        <input name="model" id="model" type="text" placeholder="car model">
                     </div>
                     <div class="group">
                         <label>Car Manufacturer</label><br>
-                        <input type="text">
+                        <input name="manufacturer" id="manufacturer" type="text" placeholder="car manufacurer">
                     </div>
                     <div class="group">
                         <label>Car Color</label><br>
-                        <input type="text">
+                        <input name="color" id="color" type="text" placeholder="car color">
                     </div>
                 </div>
                 <div class="up_group">
                     <div class="group">
                         <label>Price/Day</label><br>
-                        <input type="text">
+                        <input name="price" id="price" type="text" placeholder="car price/day">
                     </div>
                     <div class="group">
                         <label>Mileage</label><br>
-                        <input type="text">
+                        <input name="mileage" id="mileage" type="text" placeholder="car mileage">
                     </div>
                     <div class="group">
                         <label>Office id</label><br>
-                        <input type="text">
+                        <input name="office_id" id="office_id" type="text" placeholder="car office id">
                     </div>
-                    <input type="submit" value="GO" class="btn btn-secondary" style="min-width: 70%; align-self: center; display: block !important; margin: auto;">
+                    <input name="car_register" id="car_register" type="submit" value="GO" class="btn btn-secondary" style="min-width: 70%; align-self: center; display: block !important; margin: auto;">
                 </div>
                 <div class="file_group">
                     <input type="hidden">
-                    <input type="file" name="file" id="file">
-                    <label for="file">Upload File</label>
+                    <img src="images/upload.jpg" id="image" style="width: 300px; height: 175px; margin: 10px;"/>
+                    <label for="file" class="btn btn-secondary py-3 px-4" style="height: 45px; width: 300px; margin-top: 10px; margin-left: 10px;">Upload File</label>
+                    <input type="file" name="file" id="file" accept="images/*">
+                    
+                    
                 </div>
             </form>
         </div>
@@ -315,14 +354,28 @@
     <script src="js/main.js"></script>
 
     <script>
+        let img = document.getElementById("image");
+        let inputFile = document.getElementById("file");
+        let urlStore = document.getElementById("car-image");
+
+        inputFile.onchange = function(){
+            img.src = URL.createObjectURL(inputFile.files[0]);
+            urlStore.value = img.src;
+        }
+    </script>
+
+    <script>
         function choose() {
             var option1 = document.getElementById("option1");
             var option2 = document.getElementById("option2");
             var option3 = document.getElementById("option3");
+            var option4 = document.getElementById("option4");
             var text1 = document.getElementById("text1");
             var text2 = document.getElementById("text2");
             var text3 = document.getElementById("text3");
             var text4 = document.getElementById("text4");
+            var text5 = document.getElementById("text5");
+            var text6 = document.getElementById("text6");
 
             text1.disabled = option1.checked ? false : true;
             if (text1.disabled == false) {
@@ -351,6 +404,21 @@
                 text4.style.backgroundColor = "white";
             } else {
                 text4.style.backgroundColor = "#D3D3D3";
+            }
+
+            text5.disabled = option4.checked ? false : true;
+            if (text5.disabled == false) {
+                text5.style.backgroundColor = "white";
+            } else {
+                text5.style.backgroundColor = "#D3D3D3";
+            }
+
+            text6.disabled = option4.checked ? false : true;
+
+            if (text6.disabled == false) {
+                text6.style.backgroundColor = "white";
+            } else {
+                text6.style.backgroundColor = "#D3D3D3";
             }
         }
     </script>

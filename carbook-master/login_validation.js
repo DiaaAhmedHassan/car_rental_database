@@ -11,5 +11,4 @@ function valid_login(){
         return false;
     }
     return true;
-    //window.location.href="login.php";
 }
