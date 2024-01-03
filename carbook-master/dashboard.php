@@ -208,7 +208,7 @@
             </div>
             <div style="background-color: white; border-radius: 5px;">
                 <h2 style="grid-column: 1; grid-row: 1; margin: 10px 0px 5px 20px; max-height: 10%;">Add New Car</h2>
-                <form action="dashboard.php" method="POST" class="new_car_form" onsubmit="valid_dash_board()">
+                <form action="dashboard.php" method="POST" class="new_car_form" onsubmit="return valid_dash_board()">
                     <div class="up_group" style="grid-column: 1; grid-row: 2; margin:10px;">
                         <div class="group">
                             <label>Plate id</label><br>
@@ -384,6 +384,7 @@
                 text1.style.backgroundColor = "white";
                 if(text1 == "" ){
                     alert("please insert a start date");
+                    window.history.back();
                     return false;
                 }
             } else {

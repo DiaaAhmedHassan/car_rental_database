@@ -78,7 +78,7 @@
 <body>
   
   <div class="container">
-    <form action="register.php" method="post" onsubmit ="valid_register()" class="request-form ftco-animate bg-primary fadeInUp ftco-animated">
+    <form action="register.php" method="post" onsubmit ="return valid_register()" class="request-form ftco-animate bg-primary fadeInUp ftco-animated">
       <h2 style="color: white">Welcome to AutoRent</h2>
       <div class="form-group">
         <label style="color: white" for="" class="label">User name</label>
