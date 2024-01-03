@@ -1,12 +1,11 @@
 <?php
   require 'config.php';
+  
+  
   if(empty($_SESSION['client_id']))
   {
     header("Location: login.php");
   }
-
-  $q = "CALL update_car_status();";
-  mysqli_query($conn, $q);
 ?>
 
 <!DOCTYPE html>
@@ -49,7 +48,7 @@
     
 	  <nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
 	    <div class="container">
-	      <a class="navbar-brand" href="index.html">Auto<span>Rent</span></a>
+	      <a class="navbar-brand" href="index.php">Auto<span>Rent</span></a>
 	      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
 	        <span class="oi oi-menu"></span> Menu
 	      </button>
@@ -81,16 +80,85 @@
         </div>
       </div>
     </section>
+    
 		
 
 		<section class="ftco-section bg-light">
     	<div class="container">
-    		<div class="row">
+        <h3>Filter By</h3>
+        <form action="car.php" method="get">
+        <div class="row" style="margin: 0px auto 30px 0px; display: block; width: 800px"> 
 
+        <input type="radio" value="color" id="color" name="search" checked/>
+      <label for="color" style="margin-right: 20px">Color</label>
+
+      <input type="radio" value="model" id="model" name="search"/>
+      <label for="model" style="margin-right: 20px">model</label>
+
+      <input type="radio" value="manufacturer" id="Manufacturer" name="search"/>
+      <label for="Manufacurer" style="margin-right: 20px">Manufacturer</label>
+
+      <input type="radio" value="stat" id="stat" name="search"/>
+      <label for="stat" style="margin-right: 20px">Status</label>
+      
+      <input type="radio" value="price" id="price" name="search"/>
+      <label for="price" style="margin-right: 20px">Price</label>
+
+      <input type="radio" value="mil" id="mil" name="search"/>
+      <label for="mil" style="margin-right: 20px">Mileage</label>
+
+      <input type="radio" value="office" id="office" name="search"/>
+      <label for="office" style="margin-right: 20px">office name</label>
+      <br><br>
+      <input type="text" name="search_bar" id="search_bar" />
+      <input type="submit" name="search_submit" id="search_submit" value="search" style="width: 100px"
+      class="btn btn-secondary py-2 ml-1">
+      <br><br>
+
+  
+    </div>
+    
+    		<div class="row">
 				<?php
           include("config.php");
-					$q = "SELECT * FROM car";
+
+          
+          
+          $q = "SELECT * FROM car";
+
+          if(isset($_GET["search_submit"])){
+            
+            $search = $_GET['search'];
+            $color_search = $_GET['search_bar'];
+
+            if($search == "color"){
+              $q = "SELECT * FROM car WHERE car.color = '$color_search'";
+            }else if($search == "model"){
+              $q = "SELECT * FROM car WHERE car.model = '$color_search'";
+            }else if($search == "manufacturer"){
+              $q = "SELECT * FROM car WHERE car.manufacturer = '$color_search'";
+            }else if($search == "stat"){
+              $q = "SELECT * FROM car WHERE car.status = '$color_search'";
+            }else if($search == "price"){
+              $q = "SELECT * FROM car WHERE car.price = '$color_search'";
+            }else if($search == "mil"){
+              $q = "SELECT * FROM car WHERE car.mileage = '$color_search'";
+            }else if($search == "office"){
+              $q = "SELECT * FROM car INNER JOIN office
+              ON car.office_id = office.id
+              WHERE office.name = '$color_search'";
+            }else{
+              $q = "SELECT * FROM car";
+            }
+          }
+					
           $result = mysqli_query($conn, $q);
+          if(mysqli_num_rows($result) == 0){
+            echo "<p>No results found.</p>
+            <image src=\"images/not_found.png\" style=\"width: 500px; hight: 500px\"/>
+            ";
+            return;
+          }
 					while($row = mysqli_fetch_assoc($result))
 					{
             $car_id = $row['plate_id'];
@@ -123,6 +191,7 @@
     			</div>
 				<?php } ?>
     		</div>
+      </form>
         
     		<div class="row mt-5">
           <div class="col text-center">
