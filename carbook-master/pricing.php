@@ -31,8 +31,8 @@ if (isset($_POST["filter_button"])) {
       $q = "SELECT car.plate_id, car.model, car.image, car.price,
       IF(car.plate_id IN (SELECT r.plate_id
                           FROM reservation as r
-                          WHERE r.start_date <= 'date'
-                          AND r.end_date > 'date'),
+                          WHERE r.start_date <= '$date'
+                          AND r.end_date > '$date'),
                           'rented', 'available') AS `status`
       FROM car;";
   }
